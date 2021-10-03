@@ -1,12 +1,12 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
 
-    const [formState, setFormState] = useState({ username: '', password: ''})
+    const [formState, setFormState] = useState({ username: '', password: '' })
 
     const handleChange = (event) => {
-        const {name, value} = event.target;
+        const { name, value } = event.target;
         setFormState({
             ...formState,
             [name]: value,
@@ -48,7 +48,9 @@ const Login = () => {
 
                 <br />
                 <div>
-                    <button type="click">Forgot My Password</button>
+                    <Link to='/forgotpassword'>
+                        Forgot My Password
+                    </Link>
                 </div>
             </form>
         </section>

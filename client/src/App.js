@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import SingleGame from './pages/SingleGame';
 import Nav from './components/Nav';
+import ForgotPW from './pages/ForgotPW';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/profile/:username" component={Profile} />
           <Route exact path="/donate" component={Donations} />
+          <Route exact path="/forgotpassword" component={ForgotPW} />
         </Switch>
       </div>
     </Router>
