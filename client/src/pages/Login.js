@@ -20,10 +20,10 @@ const Login = () => {
             <h1>Sign in</h1>
 
             <form>
-
                 <div>
-                    <label for="username">Username:</label>
+                    <label htmlFor="username">Username:</label>
                     <input
+                        name='username'
                         type="text"
                         id="username"
                         placeholder="Username"
@@ -32,8 +32,9 @@ const Login = () => {
                 </div>
 
                 <div>
-                    <label for="password-login">Password:</label>
+                    <label htmlFor="password-login">Password:</label>
                     <input
+                        name='password'
                         type="password"
                         id="password-login"
                         placeholder="Password"
