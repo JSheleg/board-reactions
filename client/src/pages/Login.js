@@ -11,8 +11,6 @@ const Login = () => {
             ...formState,
             [name]: value,
         });
-
-        console.log(formState.username)
     };
 
     return (
