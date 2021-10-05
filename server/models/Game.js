@@ -1,4 +1,6 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 
 const gameSchema = new Schema(
     {
@@ -8,9 +10,10 @@ const gameSchema = new Schema(
             unique: true,
             trim: true
         },
-        category_id: {
-            type: Number,
-            required:true,
+        category: {
+            type: Schema.Types.ObjectId,
+            ref: 'Category',
+            required: true
         },
         min_number_of_players: {
             type: Number,
@@ -41,18 +44,10 @@ const gameSchema = new Schema(
         ]
 
     },
-    {
-        toJSON: {
-            virtuals: true
-        },
-        id: false
-    }
+    
 );
 
-gameSchema.virtual('favoriteTotal').get(function(){
-    return this.favorites.length
-})
 
-const Game = model('Game', gameSchema)
+const Game = mongoose.model('Game', gameSchema)
 
 module.exports = Game;
