@@ -6,15 +6,13 @@ const typeDefs = gql `
     type Game {
         _id: ID
         game_name: String
-        category: String
-        min_num_players: Number
-        max_num_players: Number
-        avg_min_time: Number
-        avg_max_time: Number
+        category_id: Int
+        min_number_of_players: Int
+        max_number_of_players: Int
+        avg_min_game_time: Int
+        avg_max_game_time: Int
         game_description: String
-        favorites: [User]
-        favoriteTotal: Int
-
+        
     }
 
     type Query{

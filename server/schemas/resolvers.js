@@ -1,7 +1,9 @@
+const { Game } = require('../models');
+
 const resolvers = {
     Query: {
-        helloWorld: () => {
-            return 'Hello World!';
+        games: async () => {
+            return Game.find().sort({game_name:-1});
         }
     }
 };

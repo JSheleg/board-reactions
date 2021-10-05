@@ -8,24 +8,24 @@ const gameSchema = new Schema(
             unique: true,
             trim: true
         },
-        category: {
-            type: String,
+        category_id: {
+            type: Number,
             required:true,
         },
-        min_num_players: {
+        min_number_of_players: {
             type: Number,
             required: true,
             default: 1,
         },
-        max_num_players:{
+        max_number_of_players:{
             type: Number,
             required: true
         },
-        avg_min_time: {
+        avg_min_game_time: {
             type: Number,
             required: true
         },
-        avg_max_time: {
+        avg_max_game_time: {
             type: Number,
             required: true
         },
@@ -44,7 +44,8 @@ const gameSchema = new Schema(
     {
         toJSON: {
             virtuals: true
-        }
+        },
+        id: false
     }
 );
 
