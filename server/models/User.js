@@ -19,7 +19,25 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minlength: 6
-    }
+    },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+      }
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
+    games: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Game'
+      }
+    ]
   },
   {
     toJSON: {
@@ -46,6 +64,14 @@ userSchema.methods.isCorrectPassword = async function(password) {
 userSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });
+
+userSchema.virtual('commentCount').get(function() {
+  return this.comments.length;
+})
+
+userSchema.virtual('gamesCount').get(function(){
+  return this.games.length;
+})
 
 const User = model('User', userSchema);
 
