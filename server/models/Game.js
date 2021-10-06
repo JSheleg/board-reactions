@@ -44,11 +44,13 @@ const gameSchema = new Schema(
         ]
 
     },
+
     {
         toJSON: {
             virtuals: true
         }
     }
+
 );
 
 gameSchema.virtual('favoritesCount').get(function() {

@@ -43,7 +43,7 @@ const typeDefs = gql `
         me: User
         users: [User]
         user(username: String!): User
-        comment(_id: ID!): Comment
+        comments: [Comment]
         categories: [Category]
         games(category_name:String):[Game]
     }
