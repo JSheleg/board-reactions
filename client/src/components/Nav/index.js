@@ -40,7 +40,7 @@ const Nav = () => {
         </ul>
 
         <div class="navbar">
-  <label for="toggle"><i class="fa fa-bars"></i> Menu</label>
+  <label for="toggle"><i class="fa fa-bars"></i>Menu</label>
 </div>
 
         </div>

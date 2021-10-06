@@ -538,7 +538,6 @@ const AllGames = () => {
           {gameData.map((game, i) => {
             return (
               <Grid item xs={4} i={i}>
-                {console.log(i)}
                 <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
                   <CardMedia
                     component="img"
