@@ -1,4 +1,6 @@
-const  { Game, Category }  = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { Game, Category, Comment, Friends, User }  = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -14,8 +16,34 @@ const resolvers = {
         games: async (parent, {category_name}) => {
             const params = category_name? {category_name} : {};
             return Game.find(params).sort({game_name: -1});
-        }
-        
+        },
+        //current user login
+        me: async (parent, args, context) => {
+            if (context.user) {
+              const userData = await User.findOne({ _id: context.user._id })
+                .select('-__v -password')
+                .populate('comment')
+                .populate('friends');
+      
+              return userData;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+          },
+          //get all users
+          users: async () => {
+            return User.find()
+              .select('-__v -password')
+              .populate('comment')
+              .populate('friends');
+          },
+          //get one user
+          user: async (parent, { username }) => {
+            return User.findOne({ username })
+              .select('-__v -password')
+              .populate('comment')
+              .populate('friends');
+          },   
     },
     Mutation: {
         //add Category to category lists
