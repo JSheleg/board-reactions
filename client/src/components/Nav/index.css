@@ -1,0 +1,85 @@
+body {
+    background: #222;
+    font-family: 'Questrial', sans-serif;
+    font-size: 18px;
+    line-height: 1.5em;
+  }
+  
+  .fa-bars {
+    margin-right: 10px;
+  }
+  
+  .navigation-menu {
+    background: #111;
+    height: 100%;
+    width: 50%;
+    padding: 60px 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    position: fixed;
+    left: -45%;
+    top: 0;
+    transition: all 0.5s;
+    z-index: 1;
+    font-size: 60px;
+  }
+  
+  .navigation-menu li {
+    padding: 30px 0;
+  }
+  
+  .navigation-menu li:nth-of-type(2n) {
+    background: #222;
+  }
+  
+  .navigation-menu li:hover {
+    background: #444;
+  }
+  
+  .navigation-menu a {
+    color: #E5E5E5;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    transition:all 0.3s;
+  }
+  
+  .navbar {
+    background: #E5E5E5;
+    padding: 20px;
+    /* position: fixed; */
+    width: 95%;
+    top: 0;
+  }
+  
+  .content {
+    width: 80%;
+    margin: 40px auto;
+    padding-top: 75px;
+    transition: all 0.5s; 
+    position: relative;
+    left: 0;
+  }
+  
+  /* Hide the checkbox */
+  #toggle {
+    display: none; 
+  }
+  
+  /* Use this label to toggle the sliding menu */
+  label[for="toggle"] {
+    cursor: pointer;
+    font-size: 30px;
+    margin-left: 700px;
+  }
+  
+  /* Slide menu when checkbox is checked */
+  input#toggle:checked + ul.navigation-menu {
+    left: 0;
+  }
+  
+  /* Also slide content when checkbox is checked */
+  input#toggle:checked ~ .content {
+    left: -45%;
+  }

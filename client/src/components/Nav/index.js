@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import './index.css';
 
 const Nav = () => {
     return (
-        <ul>
+        <div>
+        <input type="checkbox" id="toggle" name="toggle"></input>
+        <ul className="navigation-menu">
             <li>
                 <Link to='/'>
                     Home
@@ -35,6 +38,12 @@ const Nav = () => {
                 </Link>
             </li>
         </ul>
+
+        <div class="navbar">
+  <label for="toggle"><i class="fa fa-bars"></i> Menu</label>
+</div>
+
+        </div>
     )
 }
 

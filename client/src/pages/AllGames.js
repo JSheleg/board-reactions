@@ -13,6 +13,8 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import image from "../assets/uno.png";
+// import { ADD_GAME } from '../utils/mutations'
+// import { useMutation } from '@apollo/client'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,6 +28,9 @@ const ExpandMore = styled((props) => {
 }));
 
 const AllGames = () => {
+
+  // const [ gameData, { error } ] = useMutation (ADD_GAME)
+
   const gameData = [
     {
       game_name: "Plunder",
@@ -520,20 +525,20 @@ const AllGames = () => {
     },
   ];
 
-  const [expanded, setExpanded] = React.useState(false);
+  const [expandedId, setExpandedId] = React.useState(-1);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = (i) => {
+    setExpandedId(expandedId === i ? -1 : i);
   };
 
   return (
     <div className="gameCardContainer">
       <Box sx={{ flexGrow: 6 }}>
         <Grid container spacing={2}>
-          {gameData.map((game, index) => {
+          {gameData.map((game, i) => {
             return (
-              <Grid item xs={4} index={index}>
-                {console.log(index)}
+              <Grid item xs={4} i={i}>
+                {console.log(i)}
                 <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
                   <CardMedia
                     component="img"
@@ -564,15 +569,15 @@ const AllGames = () => {
                       <ShareIcon />
                     </IconButton>
                     <ExpandMore
-                      expand={expanded}
-                      onClick={handleExpandClick}
-                      aria-expanded={expanded}
+                      expand={expandedId === i}
+                      onClick={() => handleExpandClick(i)}
+                      aria-expanded={expandedId === i}
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
                     </ExpandMore>
                   </CardActions>
-                  <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
                     <CardContent>
                       <Typography paragraph>{game.game_description}</Typography>
                     </CardContent>
