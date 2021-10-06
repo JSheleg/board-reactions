@@ -1,5 +1,7 @@
 const { Game, Category, User } = require('../models');
 const db = require('../config/connection');
+const faker = require('faker');
+
 
 db.once('open', async() => {
   
