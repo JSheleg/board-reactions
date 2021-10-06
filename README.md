@@ -1,70 +1,103 @@
-# Getting Started with Create React App!
+# Board Reactions ![Github licence](http://img.shields.io/badge/license-MIT-blue.svg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+A fullstack MERN application that creates an interactive social networking site that connects board game enthusiast to new games and new people.
 
-In the project directory, you can run:
+## Elevator Pitch
 
-### `npm start`
+The quarantine enacted by COVID caused us to lose connection with many of our social groups making it difficult to get together and play games.
+Many of our friends may have moved or decided to stay in a self quarantine with the pandemic still in full swing. As a result, they find themselves
+without anyone to play or discuss one of their favorite hobbies, board games! We created a social platform that will allow this individual to connect
+with other board game enthusiasts on games they both enjoy or discover new games together. They will be able to find, follow, and chat with like minded individuals 
+in the board game community to create life long connections!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. [Visual Demonstration](#visual-demonstration)
+2. [User Story](#user-story)
+3. [Acceptance Criteria](#acceptance-criteria)
+4. [Installation Instructions](#installation-instructions)
+5. [Usage Information](#usage-information)
+6. [Contributor Guidelines](#contributor-guidelines)
+7. [Testing Instructions](#testing-instructions)
+8. [License Info](#license-info)
+9. [Questions](#questions)
 
-### `npm test`
+## Visual Demonstration
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![FindMyBoards GIF/Snapshot]()
 
-### `npm run build`
+[DEPLOYED ON HEROKU!]()
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## User Story
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    AS an avid board game enthusiast
+    I WANT an online social platform for board games
+    SO THAT I can connect with the board game community, rank and discover new board games, and set up game nights with friends. 
 
-### `npm run eject`
+## Acceptance Criteria
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    GIVEN the board-reactions home page
+    THEN I am  presented with the title of the application, a carousel of games, a link to games and a link to login or create a new account
+    WHEN I click on the login link
+    THEN I am directed to either login page or sign up page
+    WHEN I log into my profile
+    THEN I am presented with a dashboard that includes my favorite games, following list and comments that I have previously made.
+    WHEN I click on games
+    THEN I can see all the current games available with the number of comments, number of favorites and a short description of the game 
+    WHEN I select see more information on the game
+    THEN I am presented with the game description, a way to make comments, read comments and view the current ratings of the game based on user feedback along with additional information on the game
+    WHEN I click on a persons name in following on my profile
+    THEN I am able to see their profile with their favorite games, comments and who they are following
+    WHEN I view their profile 
+    THEN I am able to follow them or unfollow them.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Installation Instructions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+From repository `git clone <url>` to clone down respository to local machine
+`npm i` to install dependecies and packages to local machine
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage Information
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This application serves as a way to interact with others through a social media like site. It can be changed based on the theme of the interaction, but it serves as a way to connect. 
 
-### Code Splitting
+## Contributor Guidelines
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* [Submit bugs and feature requests](https://github.com/JSheleg/board-reactions/issues).
+* Review [source code changes](https://github.com/JSheleg/board-reactions/pulls).
 
-### Analyzing the Bundle Size
+## Test Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* None
 
-### Making a Progressive Web App
+## License Info
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Copyright 2021
+The source code for the site is licensed under the MIT license and can be found at the link below:
+[License Info Link](https://opensource.org/licenses/MIT)
+      
 
-### Advanced Configuration
+## Questions?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* Find use on Github at:
+    * [Jane Vo](https://github.com/janekv20)
+    * [Mark Giannelli](https://github.com/mjgiannelli)
+    * [Jessica Sheleg](https://github.com/JSheleg)
+    * [Joshsands](http://github.com/Joshsands).
 
-### Deployment
+* Or e-mail us at:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* giannellimj@gmail.com
+* jessica.sheleg@gmail.com
+* josh.sands@mail.com
+* jane.h.vo@gmail.com
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
