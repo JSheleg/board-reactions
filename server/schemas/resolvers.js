@@ -8,6 +8,10 @@ const resolvers = {
         categories: async () => {
             return await Category.find();
         },
+        //get all comments
+        comments: async () => {
+            return await Comment.find();
+        },
         //get all games
         games: async () => {
             return await Game.find()

@@ -1,4 +1,4 @@
-const { Game, Category, User } = require('../models');
+const { Game, Category, User, Comment, Friends } = require('../models');
 const db = require('../config/connection');
 const faker = require('faker');
 
@@ -534,22 +534,27 @@ db.once('open', async() => {
     const password = faker.internet.password();
 
     userData.push({ username, email, password });
+    // console.log(userData.length + " user data ");
   }
+  
+  let createdUsers = [];
 
-  const createdUsers = await User.collection.insertMany(userData);
+  createdUsers = await User.collection.insertMany(userData);
 
   console.log('users seeded')
 
   // create friends
   for (let i = 0; i < 100; i += 1) {
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { _id: userId } = createdUsers.ops[randomUserIndex];
+    
+    const randomUserIndex = Math.floor(Math.random() * userData.length);
+    // console.log(randomUserIndex + " random user index")
+    const { _id: userId } = userData[randomUserIndex];
 
     let friendId = userId;
 
     while (friendId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-      friendId = createdUsers.ops[randomUserIndex];
+      const randomUserIndex = Math.floor(Math.random() * userData.length);
+      friendId = userData[randomUserIndex];
     }
 
     await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
@@ -564,17 +569,16 @@ db.once('open', async() => {
   for (let i = 0; i < 100; i += 1) {
     const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username, _id: userId } = createdUsers.ops[randomUserIndex];
+    const randomUserIndex = Math.floor(Math.random() * userData.length);
+    const { username, _id: userId } = userData[randomUserIndex];
 
-    const createdComments = await Comment.create({ commentText, username });
+    createdComments = await Comment.create({ commentText, username });
 
     const updatedUser = await User.updateOne(
       { _id: userId },
       { $push: { comments: createdComments._id } }
     );
 
-    createdComments.push(createdComments);
   }
 
   console.log('comments seeded')
