@@ -44,8 +44,16 @@ const gameSchema = new Schema(
         ]
 
     },
-    
+    {
+        toJSON: {
+            virtuals: true
+        }
+    }
 );
+
+gameSchema.virtual('favoritesCount').get(function() {
+    return this.favorites.length;
+})
 
 
 const Game = mongoose.model('Game', gameSchema)

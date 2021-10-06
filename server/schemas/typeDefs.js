@@ -7,13 +7,18 @@ const typeDefs = gql `
         _id: ID
         username: String
         email: String
-        comment: [Comment]
-        friend: [User]
+        comments: [Comment]
+        commentCount: Int
+        friends: [User]
+        friendCount: Int
+        games: [Game]
+        gamesCount: Int
     }
     type Comment {
         _id: ID
         commentText: String
         username: String
+        createdAt: String
     }
     type Auth {
         token: ID!
@@ -32,6 +37,7 @@ const typeDefs = gql `
         avg_min_game_time: Int
         avg_max_game_time: Int
         game_description: String
+        favoritesCount: Int
     }
     type Query {
         me: User
@@ -48,6 +54,7 @@ const typeDefs = gql `
         addComment(commentText: String!): Comment
         addCategory(category_name: String!): Category
         addGame(game_name: String!): Game
+        addFavorites(game._id: ID!, user._id ): Game
     }
 
 `;
