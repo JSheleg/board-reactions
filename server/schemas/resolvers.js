@@ -69,9 +69,48 @@ const resolvers = {
                 return {game};
             };
         },
-    }
+        //add a friend to a user
+        addFriend: async (parent, {friendId}, context) => {
+            if(context.user){
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id},
+                    { $addToSet: {friends: friendId}},
+                    {new: true}
+                ).populate('friends');
+                return updatedUser;
+            }
 
-    
+            throw new AuthenticationError('You need to be logged in');
+        },
+        //add a game favorited by the user
+        addFavoriteGame: async ( parent, {gameId}, context) => {
+            if(context.user){
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id},
+                    { $addToSet: {games: gameId}},
+                    {new: true}
+                ).populate('games');
+
+                return updatedUser;
+            }
+
+            throw new AuthenticationError('You need to be logged in');
+        },
+        //add a comment to a game via a user
+        addComment: async (parent,args,context) => {
+            if(context.user){
+                const comment = await Comment.create({...args, username:context.user.username});
+
+                await Game.findByIdAndUpdate(
+                    {_id: context.user._id},
+                    { $push: { comments: comment._id}},
+                    { new: true}
+                );
+
+                return thought;
+            }
+        }
+    }  
 };
 
 module.exports = resolvers;

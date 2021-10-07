@@ -41,6 +41,12 @@ const gameSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'User'
             }
+        ],
+        comments: [
+            {
+                type:Schema.Types.ObjectId,
+                ref: 'Comment'
+            }
         ]
 
     },
@@ -55,6 +61,10 @@ const gameSchema = new Schema(
 
 gameSchema.virtual('favoritesCount').get(function() {
     return this.favorites.length;
+})
+
+gameSchema.virtuals('commentCount').get(function() {
+    return this.comments.length;
 })
 
 

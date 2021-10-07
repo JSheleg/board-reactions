@@ -38,6 +38,10 @@ const typeDefs = gql `
         avg_max_game_time: Int
         game_description: String
         favoritesCount: Int
+        favorites:[User]
+        comments:[Comment]
+        commentCount: Int
+
     }
     type Query {
         me: User
@@ -54,7 +58,9 @@ const typeDefs = gql `
         addComment(commentText: String!): Comment
         addCategory(category_name: String!): Category
         addGame(game_name: String!): Game
-        addFavorites(game._id: ID!, user._id ): Game
+        addFavoriteGame(game._id: ID!, user._id ): Game
+        addFriend(friendId: ID!): User
+        
     }
 
 `;
