@@ -38,6 +38,10 @@ const typeDefs = gql `
         avg_max_game_time: Int
         game_description: String
         favoritesCount: Int
+        favorites:[User]
+        comments:[Comment]
+        commentCount: Int
+
     }
     type Query {
         me: User
