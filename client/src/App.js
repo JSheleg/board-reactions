@@ -10,6 +10,7 @@ import Signup from './pages/Signup';
 import SingleGame from './pages/SingleGame';
 import Nav from './components/Nav';
 import ForgotPW from './pages/ForgotPW';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -27,8 +28,10 @@ function App() {
           <Route exact path="/donate" component={Donations} />
           <Route exact path="/forgotpassword" component={ForgotPW} />
         </Switch>
+        <Footer />
       </div>
     </Router>
+    
   );
 }
 
