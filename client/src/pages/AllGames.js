@@ -13,6 +13,8 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import image from "../assets/uno.png";
+import { Link } from "react-router-dom";
+
 // import { ADD_GAME } from '../utils/mutations'
 // import { useMutation } from '@apollo/client'
 
@@ -539,12 +541,14 @@ const AllGames = () => {
             return (
               <Grid item xs={4} i={i}>
                 <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
+                <Link to='/games/name:'>
                   <CardMedia
                     component="img"
                     height="140"
                     image={image}
                     alt="boardgame image"
                   />
+                  </Link>
 
                   <CardContent>
                     <Typography gutterBottom variant="h4" component="div">
