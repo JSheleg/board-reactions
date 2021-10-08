@@ -2,7 +2,7 @@
 const { gql } = require('apollo-server-express');
 
 //create our typeDefs
-const typeDefs = gql `
+const typeDefs = gql`
     type User {
         _id: ID
         username: String
@@ -62,7 +62,6 @@ const typeDefs = gql `
         addFriend(friendId: ID!): User
         
     }
-
 `;
 
 //export the typeDefs
