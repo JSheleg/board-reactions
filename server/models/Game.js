@@ -63,7 +63,7 @@ gameSchema.virtual('favoritesCount').get(function() {
     return this.favorites.length;
 })
 
-gameSchema.virtuals('commentCount').get(function() {
+gameSchema.virtual('commentCount').get(function() {
     return this.comments.length;
 })
 

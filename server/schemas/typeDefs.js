@@ -58,7 +58,7 @@ const typeDefs = gql `
         addComment(commentText: String!): Comment
         addCategory(category_name: String!): Category
         addGame(game_name: String!): Game
-        addFavoriteGame(game._id: ID!, user._id ): Game
+        addFavoriteGame(_id: ID ): User
         addFriend(friendId: ID!): User
         
     }
