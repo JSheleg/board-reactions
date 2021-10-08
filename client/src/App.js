@@ -11,6 +11,9 @@ import SingleGame from './pages/SingleGame';
 import Nav from './components/Nav';
 import ForgotPW from './pages/ForgotPW';
 import Footer from './components/Footer';
+import SubmitGame from './pages/SubmitGame';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
@@ -25,6 +28,7 @@ function App() {
           <Route exact path="/games/:name" component={SingleGame} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/profile/:username" component={Profile} />
+          <Route exact path="/submitgame" component={SubmitGame} />
           <Route exact path="/donate" component={Donations} />
           <Route exact path="/forgotpassword" component={ForgotPW} />
         </Switch>

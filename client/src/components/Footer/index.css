@@ -1,24 +1,15 @@
-/* .footer {
-    background: #e5e5e5;
-    padding: 30px;
-    font-size: 30px;
-    margin: 0 auto;
-    align-items: flex-end;
-    position: fixed;
-    width: 100%;
-    text-align: center;
-  } */
 
 .footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
-  width: 100%;
-  background-color: #e5e5e5;
+  width: 20%;
+  background-color: #0a58ca;
   color: black;
   text-align: center;
-  padding: 20px;
-  margin-right: 0;
+  padding: 2rem;
+  margin-left: 10rem;
+  float: right;
 }
 
 .fa {

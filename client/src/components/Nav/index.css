@@ -8,7 +8,7 @@ body {
 }
 
 .navigation-menu {
-  background: black;
+  background: #0a58ca;
   height: 100%;
   width: 20%;
   padding: 60px 0;
@@ -28,15 +28,15 @@ body {
 }
 
 .navigation-menu li:nth-of-type(2n) {
-  background: #222;
+  background: #45bbff;
 }
 
 .navigation-menu li:hover {
-  background: #444;
+  background: black;
 }
 
 .navigation-menu a {
-  color: wheat;
+  color: #e5e5e5;
   text-transform: uppercase;
   text-decoration: none;
   display: block;
@@ -45,9 +45,11 @@ body {
 }
 
 .navbar {
-  background: #e5e5e5;
-  padding: 0px 30px 80px 30px;
+  background: #0a58ca;
+  padding: 0px 30px 80px 100px;
   margin: 2rem;
+  float:right;
+  /* position:relative; */
 }
 
 .content {
@@ -69,7 +71,7 @@ label[for="toggle"] {
   cursor: pointer;
   font-size: 30px;
   float:right;
-  margin: 0 0 0 0;
+  margin: 0 5.5rem 0 0;
 }
 
 /* Slide menu when checkbox is checked */
@@ -80,4 +82,8 @@ input#toggle:checked + ul.navigation-menu {
 /* Also slide content when checkbox is checked */
 input#toggle:checked ~ .content {
   top: -45%;
+}
+
+i {
+  color: #e5e5e5;
 }

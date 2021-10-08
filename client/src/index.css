@@ -16,7 +16,6 @@ code {
   list-style: none;
 }
 
-/* .gameCardContainer {
-
-} */
-
+.addGame {
+  padding: 20rem 0 0 35rem;
+}

@@ -33,6 +33,11 @@ const Nav = () => {
                 </Link>
             </li>
             <li>
+                <Link to='/submitgame'>
+                    Add Game
+                </Link>
+            </li>
+            <li>
                 <Link to='/donate'>
                     Donations
                 </Link>
@@ -40,7 +45,7 @@ const Nav = () => {
         </ul>
 
         <div className="navbar">
-  <label for="toggle"><i className="fa fa-bars"></i></label>
+  <label for="toggle"><i className="fa fa-bars text-right"></i></label>
 </div>
 
         </div>
