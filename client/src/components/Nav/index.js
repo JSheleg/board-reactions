@@ -39,8 +39,8 @@ const Nav = () => {
             </li>
         </ul>
 
-        <div class="navbar">
-  <label for="toggle"><i class="fa fa-bars"></i>Menu</label>
+        <div className="navbar">
+  <label for="toggle"><i className="fa fa-bars"></i></label>
 </div>
 
         </div>
