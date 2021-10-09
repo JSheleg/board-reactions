@@ -2,10 +2,22 @@ import { useState } from "react";
 
 const Signup = () => {
 
+    const securityQuestions = [
+        'In what city were you born?',
+        'What is the name of your favorite pet?',
+        'What is your mother\'s maiden name?',
+        'What high school did you attend?',
+        'What was the make of your first car?'
+    ]
+
     const [formState, setFormState] = useState({
         username: '',
         email: '',
-        password: ''
+        password: '',
+        questionOne: '',
+        answerOne: '',
+        questionTwo: '',
+        answerTwo: ''
     })
 
     const handleChange = event => {
@@ -53,6 +65,28 @@ const Signup = () => {
                         onChange={handleChange}
                     />
                 </div>
+                <select id='security_question_one'>
+                    <option value='select'>Select Security Question 1</option>
+                    {securityQuestions.map((question, index) => {
+                        return <option 
+                        value={question}
+                        key={index}
+                        >
+                        {question}
+                        </option>
+                    })}
+                </select>
+                <select id='security_question_one'>
+                    <option value='select'>Select Security Question 2</option>
+                    {securityQuestions.map((question, index) => {
+                        return <option 
+                        value={question}
+                        key={index}
+                        >
+                        {question}
+                        </option>
+                    })}
+                </select>
                 <div>
                     <button type="submit">Signup</button>
                 </div>
