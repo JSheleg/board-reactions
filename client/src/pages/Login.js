@@ -15,6 +15,7 @@ const Login = () => {
 
     return (
         <section>
+            <Link to="/signup">← New User? Go to Signup</Link>
             <h1>Sign in</h1>
 
             <form>
