@@ -1,38 +1,16 @@
-const { Game, Category, User, Comment, Friends } = require('../models');
+const { Game, User, Comment, Friends } = require('../models');
 const db = require('../config/connection');
 const faker = require('faker');
 
 
 db.once('open', async() => {
   
-  await Category.deleteMany();
-  const categories = await Category.insertMany(
-    [
-      {
-        category_name: "Cards"
-      },
-      {
-        category_name: "Strategy"
-      },
-      {
-        category_name: "Party"
-      },
-      {
-        category_name: "Storytelling"
-      },
-      {
-        category_name: "Gambling"
-      }
-    ]);
-
-    console.log('categories seeded')
-  
   await Game.deleteMany();
   const games = await Game.insertMany(
     [
       {
         game_name: "Plunder",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 6,
         avg_min_game_time: 40,
@@ -42,7 +20,7 @@ db.once('open', async() => {
       },
       {
         game_name: "UNO",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 10,
         avg_min_game_time: 60,
@@ -52,7 +30,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Cards Against Humanity",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 3,
         max_number_of_players: 20,
         avg_min_game_time: 30,
@@ -62,7 +40,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Cubitos",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 30,
@@ -72,7 +50,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Once Upon a Time",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 2,
         max_number_of_players: 6,
         avg_min_game_time: 15,
@@ -82,7 +60,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Sprit Island",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 90,
@@ -92,7 +70,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Scythe",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 1,
         max_number_of_players: 5,
         avg_min_game_time: 90,
@@ -102,7 +80,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Root",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 60,
@@ -112,7 +90,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Wingspan",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 1,
         max_number_of_players: 5,
         avg_min_game_time: 40,
@@ -122,7 +100,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Twilight Struggle",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 2,
         avg_min_game_time: 120,
@@ -132,7 +110,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Clue",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 3,
         max_number_of_players: 6,
         avg_min_game_time: 10,
@@ -141,7 +119,7 @@ db.once('open', async() => {
       },
       {
         game_name: "BadPlots",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 10,
         avg_min_game_time: 30,
@@ -151,7 +129,7 @@ db.once('open', async() => {
       },
       {
         game_name: "500 Cribbage",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 30,
@@ -161,7 +139,7 @@ db.once('open', async() => {
       },
       {
         game_name: "#demidancer",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 2,
         avg_min_game_time: 1,
@@ -171,7 +149,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Marvel Champions",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 45,
@@ -181,7 +159,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Underwater Cities",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 80,
@@ -191,7 +169,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Aeon's End",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 60,
@@ -201,7 +179,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Race for the Galaxy",
-        category: categories[0]._id,
+        category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 30,
@@ -211,7 +189,7 @@ db.once('open', async() => {
       },
       {
         game_name: "7 Wonders",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 7,
         avg_min_game_time: 30,
@@ -221,7 +199,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Codenames",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 8,
         avg_min_game_time: 15,
@@ -231,7 +209,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Azul",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 30,
@@ -241,7 +219,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Patchwork",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 2,
         avg_min_game_time: 15,
@@ -251,7 +229,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Go",
-        category: categories[1]._id,
+        category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 2,
         avg_min_game_time: 30,
@@ -261,7 +239,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Dungeon Petz",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 90,
@@ -271,7 +249,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Dungeon Lords",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 90,
@@ -281,7 +259,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Telestrations",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 8,
         avg_min_game_time: 30,
@@ -291,7 +269,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Dixit",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 3,
         max_number_of_players: 6,
         avg_min_game_time: 30,
@@ -301,7 +279,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Monikers",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 16,
         avg_min_game_time: 30,
@@ -311,7 +289,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Awkward Guests",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 1,
         max_number_of_players: 8,
         avg_min_game_time: 45,
@@ -321,7 +299,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Sheriff of Nottingham",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 3,
         max_number_of_players: 5,
         avg_min_game_time: 60,
@@ -331,7 +309,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Time's Up! Title Recall!",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 18,
         avg_min_game_time: 60,
@@ -341,7 +319,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Last Will",
-        category: categories[2]._id,
+        category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 5,
         avg_min_game_time: 45,
@@ -351,7 +329,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Gloomhaven",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 60,
@@ -361,7 +339,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Nemesis",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 5,
         avg_min_game_time: 90,
@@ -371,7 +349,7 @@ db.once('open', async() => {
       },
       {
         game_name: "The 7th Continent",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 5,
@@ -381,7 +359,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Mage Knight Board Game",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 60,
@@ -391,7 +369,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Too Many Bones",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
         avg_min_game_time: 60,
@@ -401,7 +379,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Eldritch Horror",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 8,
         avg_min_game_time: 120,
@@ -411,7 +389,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Champions of Midgard",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 60,
@@ -421,7 +399,7 @@ db.once('open', async() => {
       },
       {
         game_name: "PARKS",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 5,
         avg_min_game_time: 30,
@@ -431,7 +409,7 @@ db.once('open', async() => {
       },
       {
         game_name: "War of the Ring",
-        category: categories[3]._id,
+        category: "Storytelling",
         min_number_of_players: 2,
         max_number_of_players: 4,
         avg_min_game_time: 120,
@@ -441,7 +419,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Poker",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 10,
         avg_min_game_time: 30,
@@ -451,7 +429,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casino",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 5,
         avg_min_game_time: 90,
@@ -461,7 +439,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Mega Bucks",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 7,
         avg_min_game_time: 75,
@@ -471,7 +449,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casino Hot Dog",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 8,
         avg_min_game_time: 30,
@@ -481,7 +459,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casino Yahtzee",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 6,
         avg_min_game_time: 30,
@@ -491,7 +469,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Mafia Casino",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 8,
         avg_min_game_time: 45,
@@ -501,7 +479,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Real Las Vegas",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 9,
         avg_min_game_time: 60,
@@ -511,7 +489,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casinopoly",
-        category: categories[4]._id,
+        category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 6,
         avg_min_game_time: 30,
