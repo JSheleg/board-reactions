@@ -24,14 +24,10 @@ const typeDefs = gql`
         token: ID!
         user: User
     }
-    type Category {
-        _id: ID
-        category_name: String
-    }
     type Game {
         _id: ID
         game_name: String
-        category: Category
+        category: String
         min_number_of_players: Int
         max_number_of_players: Int
         avg_min_game_time: Int
@@ -48,16 +44,14 @@ const typeDefs = gql`
         users: [User]
         user(username: String!): User
         comments: [Comment]
-        categories: [Category]
-        games(category_name:String):[Game]
+        games(category:String):[Game]
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addComment(commentText: String!): Comment
-        addCategory(category_name: String!): Category
-        addGame(game_name: String!): Game
+        addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
         addFavoriteGame(_id: ID ): User
         addFriend(friendId: ID!): User
         
