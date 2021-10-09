@@ -1,13 +1,10 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Game, Category, Comment, Friends, User }  = require('../models');
+const { Game, Comment, User }  = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        //Get all categories
-        categories: async () => {
-            return await Category.find();
-        },
+      
         //get all comments
         comments: async () => {
             return await Comment.find();
@@ -17,8 +14,8 @@ const resolvers = {
             return await Game.find()
         },
         //get all games by category
-        games: async (parent, {category_name}) => {
-            const params = category_name? {category_name} : {};
+        games: async (parent, {category}) => {
+            const params = category? {category} : {};
             return Game.find(params).sort({game_name: -1});
         },
         //current user login
@@ -50,25 +47,6 @@ const resolvers = {
           },   
     },
     Mutation: {
-        //add Category to category lists
-        addCategory: async(parent, args) => {
-            const category = await Category.create(args);
-            return {category};
-        },
-        // add game to category    
-        addGame: async(parent, args, context) => {
-            if(context.category){
-                const game = await Game.create({...args, category_name: context.category.category_name});
-
-                await Category.findByIdAndUpdate(
-                    {_id: context.category._id},
-                    {$push: {games: game._id}},
-                    {new: true}
-                );
-
-                return {game};
-            };
-        },
         //login
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
@@ -106,6 +84,11 @@ const resolvers = {
             }
 
             throw new AuthenticationError('You need to be logged in');
+        },
+        //add a game
+        addGame: async (parent, args) => {
+            const game = await Game.create(args);
+            return game;
         },
         //add a game favorited by the user
         addFavoriteGame: async ( parent, {gameId}, context) => {
