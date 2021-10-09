@@ -22,6 +22,7 @@ const Signup = () => {
 
     const handleChange = event => {
         const { name, value } = event.target;
+        console.log(event.target)
         setFormState({
             ...formState,
             [name]: value,
@@ -65,28 +66,48 @@ const Signup = () => {
                         onChange={handleChange}
                     />
                 </div>
-                <select id='security_question_one'>
-                    <option value='select'>Select Security Question 1</option>
-                    {securityQuestions.map((question, index) => {
-                        return <option 
-                        value={question}
-                        key={index}
-                        >
-                        {question}
-                        </option>
-                    })}
-                </select>
-                <select id='security_question_one'>
-                    <option value='select'>Select Security Question 2</option>
-                    {securityQuestions.map((question, index) => {
-                        return <option 
-                        value={question}
-                        key={index}
-                        >
-                        {question}
-                        </option>
-                    })}
-                </select>
+                <div>
+                    <select id='security_question_one'>
+                        <option value='select'>Select Security Question 1</option>
+                        {securityQuestions.map((question, index) => {
+                            return <option
+                                value={question}
+                                key={index}
+                            >
+                                {question}
+                            </option>
+                        })}
+                    </select>
+                    <label htmlFor="answerOne"></label>
+                    <input
+                        name='answerOne'
+                        type="answerOne"
+                        id="answerOne"
+                        placeholder="Answer One"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <select id='security_question_two'>
+                        <option value='select'>Select Security Question 2</option>
+                        {securityQuestions.map((question, index) => {
+                            return <option
+                                value={question}
+                                key={index}
+                            >
+                                {question}
+                            </option>
+                        })}
+                    </select>
+                    <label htmlFor="answerTwo"></label>
+                    <input
+                        name='answerTwo'
+                        type="answerTwo"
+                        id="answerTwo"
+                        placeholder="Answer Two"
+                        onChange={handleChange}
+                    />
+                </div>
                 <div>
                     <button type="submit">Signup</button>
                 </div>
