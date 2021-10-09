@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Signup = () => {
 
-    const securityQuestions = [
+    const securityQuestionsOne = [
         'In what city were you born?',
         'What is the name of your favorite pet?',
         'What is your mother\'s maiden name?',
         'What high school did you attend?',
         'What was the make of your first car?'
     ]
+
+    const [securityQuestionsTwo, setSecurityQuestionsTwo] = useState(
+        [
+            'In what city were you born?',
+            'What is the name of your favorite pet?',
+            'What is your mother\'s maiden name?',
+            'What high school did you attend?',
+            'What was the make of your first car?'
+        ]
+    )
 
     const [formState, setFormState] = useState({
         username: '',
@@ -20,12 +30,31 @@ const Signup = () => {
         answerTwo: ''
     })
 
+    useEffect(() => {
+        const { questionOne } = formState;
+        const updatedSecurityTwoQuestions = securityQuestionsOne.filter(question => question !== questionOne);
+
+        setSecurityQuestionsTwo(updatedSecurityTwoQuestions);
+
+
+
+    }, [formState.questionOne])
+
     const handleChange = event => {
         const { name, value } = event.target;
-        console.log(event.target)
+
         setFormState({
             ...formState,
             [name]: value,
+        })
+    }
+
+    const handleClick = event => {
+        const { id, value } = event.target
+
+        setFormState({
+            ...formState,
+            [id]: value
         })
     }
 
@@ -67,9 +96,9 @@ const Signup = () => {
                     />
                 </div>
                 <div>
-                    <select id='security_question_one'>
+                    <select id='questionOne' onClick={handleClick}>
                         <option value='select'>Select Security Question 1</option>
-                        {securityQuestions.map((question, index) => {
+                        {securityQuestionsOne.map((question, index) => {
                             return <option
                                 value={question}
                                 key={index}
@@ -83,17 +112,19 @@ const Signup = () => {
                         name='answerOne'
                         type="answerOne"
                         id="answerOne"
-                        placeholder="Answer One"
+                        placeholder="Answer"
                         onChange={handleChange}
                     />
                 </div>
                 <div>
-                    <select id='security_question_two'>
+                    <select id='questionTwo' onClick={handleClick}>
                         <option value='select'>Select Security Question 2</option>
-                        {securityQuestions.map((question, index) => {
+                        {securityQuestionsTwo.map((question, index) => {
                             return <option
                                 value={question}
                                 key={index}
+                                style={{ visibility: 'visible' }}
+                                id={index}
                             >
                                 {question}
                             </option>
@@ -104,7 +135,7 @@ const Signup = () => {
                         name='answerTwo'
                         type="answerTwo"
                         id="answerTwo"
-                        placeholder="Answer Two"
+                        placeholder="Answer"
                         onChange={handleChange}
                     />
                 </div>
