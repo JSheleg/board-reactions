@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
+import { ADD_USER } from "../utils/mutations";
 
 const Signup = () => {
-
+    
+    const [addUser] = useMutation(ADD_USER);
     const securityQuestionsOne = [
         'In what city were you born?',
         'What is the name of your favorite pet?',
@@ -30,7 +35,7 @@ const Signup = () => {
         answerTwo: ''
     })
 
-    // update security questions 2 array once user selects first question
+    // update security questions 2 array to remove first question once user selects first question
     useEffect(() => {
         const { questionOne } = formState;
         const updatedSecurityTwoQuestions = securityQuestionsOne.filter(question => question !== questionOne);
@@ -63,7 +68,7 @@ const Signup = () => {
         <section>
             <h1>Sign Up</h1>
 
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input

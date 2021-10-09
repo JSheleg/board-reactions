@@ -10,3 +10,30 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const ADD_USER = gql`
+  mutation addUser(
+    $username: String!, 
+    $email: String!, 
+    $password: String!, 
+    $questionOne: String!,
+    $answerOne: String!,
+    $questionTwo: String!,
+    $answerTwo: String!
+  ) {
+    addUser(
+      username: $username
+      email: $email
+      password: $password
+      questionOne: $questionOne
+      answerOne: $answerOne
+      questionTwo: $questionTwo
+      answerTwo: $answerTwo
+    ) {
+      token
+      user {
+        _id
+      }
+    }
+  }
+`;
