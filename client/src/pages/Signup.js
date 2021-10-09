@@ -5,7 +5,7 @@ import Auth from '../utils/auth';
 import { ADD_USER } from "../utils/mutations";
 
 const Signup = () => {
-    
+
     const [addUser] = useMutation(ADD_USER);
     const securityQuestionsOne = [
         'In what city were you born?',
@@ -64,8 +64,28 @@ const Signup = () => {
         })
     }
 
+    // submit the collected data from user to create a new user and add them to the db
+    const handleFormSubmit = async event => {
+        event.preventDefault();
+        const mutationResponse = await addUser({
+            variables: {
+                email: formState.email,
+                username: formState.username,
+                password: formState.password,
+                questionOne: formState.questionOne,
+                answerOne: formState.answerOne,
+                questionTwo: formState.questionTwo,
+                answerTwo: formState.answerTwo
+            }
+        });
+        const token = mutationResponse.data.addUser.token;
+        Auth.login(token);
+
+    }
+
     return (
         <section>
+            <Link to="/login">← Go to Login</Link>
             <h1>Sign Up</h1>
 
             <form onSubmit={handleFormSubmit}>
