@@ -30,16 +30,16 @@ const Signup = () => {
         answerTwo: ''
     })
 
+    // update security questions 2 array once user selects first question
     useEffect(() => {
         const { questionOne } = formState;
         const updatedSecurityTwoQuestions = securityQuestionsOne.filter(question => question !== questionOne);
 
         setSecurityQuestionsTwo(updatedSecurityTwoQuestions);
 
-
-
     }, [formState.questionOne])
 
+    // collect user inputs
     const handleChange = event => {
         const { name, value } = event.target;
 
@@ -49,6 +49,7 @@ const Signup = () => {
         })
     }
 
+    // collect questions user selects for security questions
     const handleClick = event => {
         const { id, value } = event.target
 
@@ -123,8 +124,6 @@ const Signup = () => {
                             return <option
                                 value={question}
                                 key={index}
-                                style={{ visibility: 'visible' }}
-                                id={index}
                             >
                                 {question}
                             </option>
