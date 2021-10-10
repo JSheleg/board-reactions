@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom';
 import { useState } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import { 
+    ApolloProvider, useQuery} from '@apollo/client';
 
-import { UPDATE_PASSWORD } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
 import UpdatePw from '../UpdatePw';
 
 const SecurityQuestions = (props) => {
+    console.log('props', props)
     const updatePwDivEl = document.getElementById('update_pw_div');
 
     const { loading, data, error } = useQuery(QUERY_USER, {
@@ -48,23 +49,8 @@ const SecurityQuestions = (props) => {
         })
     }
 
-    const handleFormSubmit = async event => {
-        event.preventDefault();
-        const {answerOne, answerTwo} = formState;
-
-        if(answerOne === user.answerOne && answerTwo === user.answerTwo) {
-            ReactDOM.render(<UpdatePw/>, updatePwDivEl)
-        } else {
-            
-            const incorrectSecurityAnswersEl = document.createElement('p')
-            incorrectSecurityAnswersEl.innerText = "Incorrect Security Answers. Please try again."
-            updatePwDivEl.appendChild(incorrectSecurityAnswersEl)
-
-        }
-    }
-
     return (
-        <form onSubmit={handleFormSubmit}>
+        <section>
             <div>
                 <label htmlFor="answerOne">{user.questionOne}</label>
                 <input
@@ -72,7 +58,7 @@ const SecurityQuestions = (props) => {
                     type="answerOne"
                     id="answerOne"
                     placeholder="Answer"
-                    onChange={handleChange}
+                    onBlur={handleChange}
                 />
             </div>
             <div>
@@ -82,16 +68,17 @@ const SecurityQuestions = (props) => {
                     type="answerTwo"
                     id="answerTwo"
                     placeholder="Answer"
-                    onChange={handleChange}
+                    onBlur={handleChange}
                 />
             </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
             <div id='update_pw_div'>
-
+            {formState.answerOne === user.answerOne && formState.answerTwo === user.answerTwo ? (
+                <UpdatePw username={props.username}/>
+            ) : (
+                <p>Incorrect Security Answers. Please Try Again.</p>
+            )}
             </div>
-        </form>
+        </section>
     )
 }
 

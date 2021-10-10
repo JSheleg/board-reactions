@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 
 import SecurityQuestions from '../components/SecurityQuestions';
-import { QUERY_USER } from '../utils/queries';
 
 
 const ForgotPW = () => {

@@ -56,7 +56,7 @@ function App() {
             <Route exact path="/profile/:username" component={Profile} />
             <Route exact path="/submitgame" component={SubmitGame} />
             <Route exact path="/donate" component={Donations} />
-            <Route exact path="/forgotpassword" component={ForgotPW} />
+            <Route exact path="/forgotpassword" component={ForgotPW}   />
           </Switch>
           <Footer />
         </div>
