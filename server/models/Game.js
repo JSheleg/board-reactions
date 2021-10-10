@@ -44,7 +44,6 @@ const gameSchema = new Schema(
         ],
         favorites:[favoriteSchema]
     },
-
     {
         toJSON: {
             virtuals: true

@@ -11,8 +11,6 @@ const typeDefs = gql`
         answerOne: String
         questionTwo: String
         answerTwo: String
-        comments: [Comment]
-        commentCount: Int
         friends: [User]
         friendCount: Int
         games: [Game]
@@ -38,7 +36,7 @@ const typeDefs = gql`
         avg_max_game_time: Int
         game_description: String
         favoritesCount: Int
-        favorites:[User]
+        favorites:[Favorite]
         comments:[Comment]
         commentCount: Int
 
@@ -50,7 +48,7 @@ const typeDefs = gql`
     type Query {
         me: User
         users: [User]
-        user(username: String!): User
+        user(username: String!): [User]
         comments: [Comment]
         games(category:String):[Game]
     }
@@ -66,11 +64,14 @@ const typeDefs = gql`
             questionTwo: String!,
             answerTwo: String!
             ): Auth
-        addComment(commentText: String!): Comment
+        addComment(commentText: String!, gameId:String!): Game
         addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
-        addFavoriteGame(_id: ID ): User
+        addFavoriteGame(gameId:String!): Game
         addFriend(friendId: ID!): User
         updatePassword(username: String!, password: String!): User
+        deleteFriend(friendId:ID!):User
+
+
     }
 `;
 // does the updatedPassword above need to have <Auth> at the end instead of <User>
