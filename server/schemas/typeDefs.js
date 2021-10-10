@@ -8,7 +8,9 @@ const typeDefs = gql`
         username: String
         email: String
         questionOne: String
+        answerOne: String
         questionTwo: String
+        answerTwo: String
         comments: [Comment]
         commentCount: Int
         friends: [User]
