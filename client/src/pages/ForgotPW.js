@@ -24,7 +24,7 @@ const ForgotPW = () => {
             <Link to="/login">← Remember Password? Go to Login</Link>
             <h1>Forgot Password</h1>
 
-            <form>
+            <section>
                 <div>
                     <label htmlFor="username"></label>
                     <input
@@ -59,7 +59,7 @@ const ForgotPW = () => {
                         <SecurityQuestions username={formState.username}/>
                     </div>
                 ) : null}
-            </form>
+            </section>
         </section>
     )
 }
