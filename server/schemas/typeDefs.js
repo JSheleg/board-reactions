@@ -43,25 +43,21 @@ const typeDefs = gql`
         commentCount: Int
 
     }
+
+    type Favorit{
+        _id: ID
+        username: String
+    }
     type Query {
         me: User
         users: [User]
         user(username: String!): [User]
         comments: [Comment]
-<<<<<<< HEAD
-        categories: [Category]
-        games(category_name:String):[Game]
-        
-=======
         games(category:String):[Game]
->>>>>>> develop
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
-<<<<<<< HEAD
-        addUser(username: String!, email: String!, password: String!): Auth
-=======
         addUser(
             username: String!, 
             email: String!, 
@@ -71,7 +67,6 @@ const typeDefs = gql`
             questionTwo: String!,
             answerTwo: String!
             ): Auth
->>>>>>> develop
         addComment(commentText: String!): Comment
         addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
         addFavoriteGame(_id: ID ): User
