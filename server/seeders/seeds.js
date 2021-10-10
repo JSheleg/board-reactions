@@ -10,11 +10,7 @@ db.once('open', async() => {
     [
       {
         game_name: "Plunder",
-<<<<<<< HEAD
-        category: categories[1]?._id,
-=======
         category: "Strategy",
->>>>>>> develop
         min_number_of_players: 2,
         max_number_of_players: 6,
         avg_min_game_time: 40,

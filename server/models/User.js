@@ -76,9 +76,6 @@ userSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });
 
-userSchema.virtual('commentCount').get(function() {
-  return this.comments.length;
-})
 
 userSchema.virtual('gamesCount').get(function(){
   return this.games.length;

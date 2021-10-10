@@ -36,21 +36,15 @@ const gameSchema = new Schema(
             type: String,
             required: true
         },
-        favorites: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
         comments: [
             {
                 type:Schema.Types.ObjectId,
                 ref: 'Comment'
             }
-        ]
+        ],
+        favorites:[favoriteSchema]
 
     },
-
     {
         toJSON: {
             virtuals: true
