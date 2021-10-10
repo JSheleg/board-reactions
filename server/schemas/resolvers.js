@@ -117,6 +117,15 @@ const resolvers = {
 
                 return thought;
             }
+        },
+        updatePassword: async (parent, {username, password}, context) => {
+
+            const updatedUser = await User.findOneAndUpdate(
+                {username: username},
+                {password: password},
+                {new: true}
+            )
+            return updatedUser
         }
     }  
 };

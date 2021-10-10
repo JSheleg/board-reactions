@@ -64,7 +64,7 @@ const typeDefs = gql`
         addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
         addFavoriteGame(_id: ID ): User
         addFriend(friendId: ID!): User
-        updatePassword(email: String!, password: String!)
+        updatePassword(username: String!, password: String!): User
     }
 `;
 
