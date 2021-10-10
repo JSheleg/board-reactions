@@ -64,9 +64,9 @@ const typeDefs = gql`
             questionTwo: String!,
             answerTwo: String!
             ): Auth
-        addComment(commentText: String!, gameId:String!): Comment
+        addComment(commentText: String!, gameId:String!): Game
         addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
-        addFavoriteGame(_id:ID!): Game
+        addFavoriteGame(gameId:String!): Game
         addFriend(friendId: ID!): User
         updatePassword(username: String!, password: String!): User
         deleteFriend(friendId:ID!):User

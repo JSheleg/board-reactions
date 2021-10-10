@@ -16,7 +16,7 @@ const resolvers = {
         //get all games by category
         games: async (parent, {category}) => {
             const params = category? {category} : {};
-            return Game.find(params).sort({game_name: -1});
+            return Game.find(params).populate('comments').sort({game_name: -1});
         },
         //current user login
         me: async (parent, args, context) => {
@@ -35,14 +35,12 @@ const resolvers = {
           users: async () => {
             return User.find()
               .select('-__v -password')
-              .populate('comments')
               .populate('friends');
           },
           //get one user
           user: async (parent, { username }) => {
             return User.findOne({ username })
               .select('-__v -password')
-              .populate('comments')
               .populate('friends');
           },   
     },
@@ -104,31 +102,31 @@ const resolvers = {
         //add a game favorited by the user
         addFavoriteGame: async ( parent, {gameId}, context) => {
             if(context.user){
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id},
-                    { $addToSet: {games: gameId}},
+                const gameData = await Game.findOneAndUpdate(
+                    { _id: gameId},
+                    { $addToSet: {favorites: context.user.username}},
                     {new: true}
-                ).populate('games');
+                ).populate('favorites');
 
-                return updatedUser;
+                return gameData;
             }
 
             throw new AuthenticationError('You need to be logged in');
         },
         //add a comment to a game 
         addComment: async (parent,{gameId, commentText},context) => {
-            console.log(context.Authorization);
+            console.log(context.user);
             if(context.user){
                 console.log(commentText);
                 const comment = await Comment.create({commentText,username:context.user.username});
 
-                await Game.findByIdAndUpdate(
+                const gameData = await Game.findByIdAndUpdate(
                     {_id: gameId},
                     { $push: { comments: comment._id}},
                     { new: true}
-                );
+                ).populate('comments');
 
-                return comment;
+                return gameData;
             }
             throw new AuthenticationError('You need to be logged in');
         },
