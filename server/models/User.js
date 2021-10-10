@@ -20,10 +20,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 6
     },
-    comments: [
+    games: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'Game'
       }
     ],
     friends: [
@@ -32,12 +32,7 @@ const userSchema = new Schema(
         ref: 'User'
       }
     ],
-    games: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Game'
-      }
-    ]
+    
   },
   {
     toJSON: {
