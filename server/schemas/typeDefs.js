@@ -73,6 +73,7 @@ const typeDefs = gql`
         updatePassword(username: String!, password: String!): User
     }
 `;
+// does the updatedPassword above need to have <Auth> at the end instead of <User>
 
 //export the typeDefs
 module.exports = typeDefs;
