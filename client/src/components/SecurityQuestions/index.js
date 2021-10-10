@@ -1,14 +1,10 @@
-import ReactDOM from 'react-dom';
 import { useState } from 'react';
-import { 
-    ApolloProvider, useQuery} from '@apollo/client';
+import { useQuery} from '@apollo/client';
 
 import { QUERY_USER } from '../../utils/queries';
 import UpdatePw from '../UpdatePw';
 
 const SecurityQuestions = (props) => {
-    console.log('props', props)
-    const updatePwDivEl = document.getElementById('update_pw_div');
 
     const { loading, data, error } = useQuery(QUERY_USER, {
         variables: { username: props.username }

@@ -33,22 +33,6 @@ const ForgotPW = () => {
                         onBlur={handleChange}
                     />
                 </div>
-                {/* 
-                <div>
-                    <label htmlFor="password-login">Password:</label>
-                    <input
-                        name='password'
-                        type="password"
-                        id="password-login"
-                        placeholder="Password"
-                        onChange={handleChange}
-                    />
-                </div> */}
-                {/* {error ? (
-                    <div>
-                        <p>The provided credentials are incorrect</p>
-                    </div>
-                ) : null} */}
 
                 <br />
 
