@@ -115,19 +115,22 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in');
         },
-        //add a comment to a game via a user
-        addComment: async (parent,args,context) => {
+        //add a comment to a game 
+        addComment: async (parent,{gameId, commentText},context) => {
+            console.log(context.Authorization);
             if(context.user){
-                const comment = await Comment.create({...args, username:context.user.username});
+                console.log(commentText);
+                const comment = await Comment.create({commentText,username:context.user.username});
 
                 await Game.findByIdAndUpdate(
-                    {_id: context.user._id},
+                    {_id: gameId},
                     { $push: { comments: comment._id}},
                     { new: true}
                 );
 
-                return thought;
+                return comment;
             }
+            throw new AuthenticationError('You need to be logged in');
         },
         updatePassword: async (parent, {username, password}, context) => {
 
