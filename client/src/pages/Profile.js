@@ -1,7 +1,12 @@
+import { useParams, Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+
+import { QUERY_USER } from '../utils/queries';
+
 const Profile = () => {
     return(
         <div>
-            This is the Profile page
+            <Link to='/submitgame'>Submit A Game!</Link>
         </div>
     )
 }

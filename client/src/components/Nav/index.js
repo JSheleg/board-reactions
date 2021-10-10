@@ -35,7 +35,7 @@ const Nav = () => {
                 </li>
                 <li>
                     {/* we will set this to logged in user eventually */}
-                    <Link to='/profile/:username'>
+                    <Link to='/profile/:username?'>
                         Profile
                     </Link>
                 </li>
