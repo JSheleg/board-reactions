@@ -35,7 +35,8 @@ const resolvers = {
           users: async () => {
             return User.find()
               .select('-__v -password')
-              .populate('friends');
+              .populate('friends')
+              .populate('games');
           },
           //get one user
           user: async (parent, { username }) => {
@@ -99,16 +100,16 @@ const resolvers = {
             const game = await Game.create(args);
             return game;
         },
-        //add a game favorited by the user
-        addFavoriteGame: async ( parent, {gameId}, context) => {
+        //add a game  to user
+        addGameToUser: async ( parent, {gameId}, context) => {
             if(context.user){
-                const gameData = await Game.findOneAndUpdate(
-                    { _id: gameId},
-                    { $addToSet: {favorites: context.user.username}},
+                let userData = await User.findByIdAndUpdate(
+                    { _id: context.user._id},
+                    { $addToSet: {games: gameId}},
                     {new: true}
-                ).populate('favorites');
+                ).populate('games')
 
-                return gameData;
+                return userData;
             }
 
             throw new AuthenticationError('You need to be logged in');

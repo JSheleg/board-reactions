@@ -42,7 +42,9 @@ const gameSchema = new Schema(
                 ref: 'Comment'
             }
         ],
-        favorites:[favoriteSchema]
+        favorites:[favoriteSchema],
+        
+        
     },
     {
         toJSON: {
