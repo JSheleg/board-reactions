@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 
+import SecurityQuestions from '../components/SecurityQuestions';
+import { QUERY_USER } from '../utils/queries';
 
 
 const ForgotPW = () => {
     const [formState, setFormState] = useState({
-        username: '',
-        password: '',
-        answerOne: '',
-        answerTwo: ''
+        username: null,
     });
-
-    const [toggleSecurityQuestions, setToggleSecurityQuestions] = useState('false');
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -21,19 +19,12 @@ const ForgotPW = () => {
         });
     };
 
-    const handleFormSubmit = async event => {
-        event.preventDefault();
-
-
-
-    }
-
     return (
         <section>
             <Link to="/login">← Remember Password? Go to Login</Link>
             <h1>Forgot Password</h1>
 
-            <form onSubmit={handleFormSubmit}>
+            <form>
                 <div>
                     <label htmlFor="username"></label>
                     <input
@@ -41,7 +32,7 @@ const ForgotPW = () => {
                         type="username"
                         id="username"
                         placeholder="Enter your username"
-                        onChange={handleChange}
+                        onBlur={handleChange}
                     />
                 </div>
                 {/* 
@@ -60,16 +51,14 @@ const ForgotPW = () => {
                         <p>The provided credentials are incorrect</p>
                     </div>
                 ) : null} */}
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
 
                 <br />
-                <div>
-                    <Link to='/forgotpassword'>
-                        Forgot My Password
-                    </Link>
-                </div>
+
+                {formState.username ? (
+                    <div>
+                        <SecurityQuestions username={formState.username}/>
+                    </div>
+                ) : null}
             </form>
         </section>
     )
