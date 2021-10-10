@@ -49,6 +49,7 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String!): [User]
+        game: [Game]
         games(category:String):[Game]
         gamebyId(gameId: String!): Game
     }
