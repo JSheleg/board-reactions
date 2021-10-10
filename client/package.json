@@ -2,6 +2,7 @@
   "name": "board-reactions",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@emotion/react": "^11.4.1",

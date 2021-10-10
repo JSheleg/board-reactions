@@ -14,6 +14,11 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
+                    <Link to='/' onClick={() => Auth.logout()}>
+                        Logout
+                    </Link>
+                </li>
+                <li>
                     <Link to='/login'>
                         Login
                     </Link>
@@ -42,11 +47,6 @@ const Nav = () => {
                 <li>
                     <Link to='/donate'>
                         Donations
-                    </Link>
-                </li>
-                <li>
-                    <Link to='/' onClick={() => Auth.logout()}>
-                        Logout
                     </Link>
                 </li>
             </ul>
