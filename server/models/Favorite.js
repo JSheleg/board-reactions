@@ -6,6 +6,11 @@ const favoriteSchema = new Schema(
       type: String,
       required: true
     }
+  },
+  {
+    toJSON:{
+      
+    }
   }
   
 );
