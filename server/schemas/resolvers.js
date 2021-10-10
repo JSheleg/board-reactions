@@ -4,11 +4,22 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-      
-        //get all comments
-        comments: async () => {
-            return await Comment.find();
+
+        //get all users
+        users: async () => {
+            return User.find()
+              .select('-__v -password')
+              .populate('friends')
+              .populate('games');
         },
+
+        //get one user
+        user: async (parent, { username }) => {
+        return User.findOne({ username })
+            .select('-__v -password')
+            .populate('friends')
+            .populate('games')
+        }, 
         //get all games
         games: async () => {
             return await Game.find()
@@ -17,6 +28,11 @@ const resolvers = {
         games: async (parent, {category}) => {
             const params = category? {category} : {};
             return Game.find(params).populate('comments').sort({game_name: -1});
+        },
+        //game by id
+        gamebyId: async(parents,{gameId}) => {
+            const params = gameId? {gameId}:{};
+            return Game.findById(gameId).populate('comments').populate('favorites');
         },
         //current user login
         me: async (parent, args, context) => {
@@ -31,19 +47,7 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
           },
-          //get all users
-          users: async () => {
-            return User.find()
-              .select('-__v -password')
-              .populate('friends')
-              .populate('games');
-          },
-          //get one user
-          user: async (parent, { username }) => {
-            return User.findOne({ username })
-              .select('-__v -password')
-              .populate('friends');
-          },   
+            
     },
     Mutation: {
         //login
@@ -113,6 +117,18 @@ const resolvers = {
             }
 
             throw new AuthenticationError('You need to be logged in');
+        },
+        //favorite a game
+        favoriteGame: async(parents, {gameId}, context) => {
+            if(context.user){
+                const updatedGame = await Game.findByIdAndUpdate(
+                    {_id: gameId},
+                    {$addToSet: {favorites: {username}}},
+                    {new: true}
+                ).populate('favorites')
+                    
+                return updatedGame;
+            }
         },
         //add a comment to a game 
         addComment: async (parent,{gameId, commentText},context) => {

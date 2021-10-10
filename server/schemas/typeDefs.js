@@ -49,8 +49,8 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String!): [User]
-        comments: [Comment]
         games(category:String):[Game]
+        gamebyId(gameId: String!): Game
     }
 
     type Mutation {
@@ -67,6 +67,7 @@ const typeDefs = gql`
         addComment(commentText: String!, gameId:String!): Game
         addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
         addGameToUser(gameId:String!): User
+        favoriteGame(gameId:String!):Game
         addFriend(friendId: ID!): User
         updatePassword(username: String!, password: String!): User
         deleteFriend(friendId:ID!):User
