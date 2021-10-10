@@ -10,4 +10,4 @@ const favoriteSchema = new Schema(
 );
 
 
-module.exports = reactionSchema;
+module.exports = favoriteSchema;

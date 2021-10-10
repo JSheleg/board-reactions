@@ -85,6 +85,17 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in');
         },
+        deleteFriend: async(parents,{friendId}, context) =>{
+            if(context.user){
+                const updatedUser = await User.findOneAndUpdate(
+                    {_id: context.user._id},
+                    {$pull: {friends:friendId}},
+                    {new:true}
+                ).populate('friends');
+                return updatedUser;
+            }
+            throw new AuthenticationError('You need to be logged in');
+        },
         //add a game
         addGame: async (parent, args) => {
             const game = await Game.create(args);
