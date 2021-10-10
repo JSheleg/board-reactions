@@ -11,8 +11,6 @@ const typeDefs = gql`
         answerOne: String
         questionTwo: String
         answerTwo: String
-        comments: [Comment]
-        commentCount: Int
         friends: [User]
         friendCount: Int
         games: [Game]
@@ -38,17 +36,12 @@ const typeDefs = gql`
         avg_max_game_time: Int
         game_description: String
         favoritesCount: Int
-        favorites:[User]
+        favorites:[Favorite]
         comments:[Comment]
         commentCount: Int
 
     }
-<<<<<<< HEAD
-
-    type Favorit{
-=======
     type Favorite {
->>>>>>> develop
         _id: ID
         username: String
     }

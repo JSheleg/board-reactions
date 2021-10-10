@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema }= require('mongoose');
 
 const favoriteSchema = new Schema(
     {
@@ -9,4 +9,5 @@ const favoriteSchema = new Schema(
     }
 );
 
-module.exports = favoriteSchema;
+
+module.exports = reactionSchema;
