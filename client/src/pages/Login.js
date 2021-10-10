@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const Login = () => {
 
-    const [formState, setFormState] = useState({ username: '', password: '' })
+    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [login, { error }] = useMutation(LOGIN);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -13,18 +18,35 @@ const Login = () => {
         });
     };
 
+    const handleFormSubmit = async event => {
+        event.preventDefault();
+        try {
+            const mutationResponse = await login({
+                variables: {
+                    email: formState.email,
+                    password: formState.password
+                }
+            });
+            const token = mutationResponse.data.login.token;
+            Auth.login(token);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
         <section>
+            <Link to="/signup">← New User? Go to Signup</Link>
             <h1>Sign in</h1>
 
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="email">Email:</label>
                     <input
-                        name='username'
+                        name='email'
                         type="text"
-                        id="username"
-                        placeholder="Username"
+                        id="email"
+                        placeholder="email"
                         onChange={handleChange}
                     />
                 </div>
@@ -39,7 +61,11 @@ const Login = () => {
                         onChange={handleChange}
                     />
                 </div>
-
+                {error ? (
+                    <div>
+                        <p>The provided credentials are incorrect</p>
+                    </div>
+                ) : null}
                 <div>
                     <button type="submit">Login</button>
                 </div>
