@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
+const favoriteSchema = require('./Favorite');
 
 const gameSchema = new Schema(
     {
@@ -36,19 +36,13 @@ const gameSchema = new Schema(
             type: String,
             required: true
         },
-        favorites: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
         comments: [
             {
                 type:Schema.Types.ObjectId,
                 ref: 'Comment'
             }
-        ]
-
+        ],
+        favorites:[favoriteSchema]
     },
 
     {
