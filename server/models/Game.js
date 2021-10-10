@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const favoriteSchema = require('./Favorite');
 
-
 const gameSchema = new Schema(
     {
         game_name: {
@@ -44,7 +43,6 @@ const gameSchema = new Schema(
             }
         ],
         favorites:[favoriteSchema]
-
     },
     {
         toJSON: {

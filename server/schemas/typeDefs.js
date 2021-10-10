@@ -43,8 +43,12 @@ const typeDefs = gql`
         commentCount: Int
 
     }
+<<<<<<< HEAD
 
     type Favorit{
+=======
+    type Favorite {
+>>>>>>> develop
         _id: ID
         username: String
     }

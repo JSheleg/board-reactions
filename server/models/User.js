@@ -38,7 +38,7 @@ const userSchema = new Schema(
     },
     games: [
       {
-        types: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Game'
       }
     ],
@@ -48,7 +48,7 @@ const userSchema = new Schema(
         ref: 'User'
       }
     ],
-    
+   
   },
   {
     toJSON: {
