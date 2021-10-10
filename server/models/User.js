@@ -20,9 +20,25 @@ const userSchema = new Schema(
       required: true,
       minlength: 6
     },
+    questionOne: {
+      type: String,
+      require: true
+    },
+    answerOne: {
+      type: String,
+      require: true
+    },
+    questionTwo: {
+      type: String,
+      require: true
+    },
+    answerTwo: {
+      type: String,
+      require: true
+    },
     games: [
       {
-        type: Schema.Types.ObjectId,
+        types: Schema.Types.ObjectId,
         ref: 'Game'
       }
     ],

@@ -11,9 +11,9 @@ const gameSchema = new Schema(
             trim: true
         },
         category: {
-            type: Schema.Types.ObjectId,
-            ref: 'Category',
-            required: true
+            type: String,
+            required: true,
+            trim: true
         },
         min_number_of_players: {
             type: Number,

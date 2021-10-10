@@ -7,6 +7,10 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
+        questionOne: String
+        answerOne: String
+        questionTwo: String
+        answerTwo: String
         comments: [Comment]
         commentCount: Int
         friends: [User]
@@ -24,14 +28,10 @@ const typeDefs = gql`
         token: ID!
         user: User
     }
-    type Category {
-        _id: ID
-        category_name: String
-    }
     type Game {
         _id: ID
         game_name: String
-        category: Category
+        category: String
         min_number_of_players: Int
         max_number_of_players: Int
         avg_min_game_time: Int
@@ -48,20 +48,35 @@ const typeDefs = gql`
         users: [User]
         user(username: String!): [User]
         comments: [Comment]
+<<<<<<< HEAD
         categories: [Category]
         games(category_name:String):[Game]
         
+=======
+        games(category:String):[Game]
+>>>>>>> develop
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
+<<<<<<< HEAD
         addUser(username: String!, email: String!, password: String!): Auth
+=======
+        addUser(
+            username: String!, 
+            email: String!, 
+            password: String!, 
+            questionOne: String!,
+            answerOne: String!,
+            questionTwo: String!,
+            answerTwo: String!
+            ): Auth
+>>>>>>> develop
         addComment(commentText: String!): Comment
-        addCategory(category_name: String!): Category
-        addGame(game_name: String!): Game
+        addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
         addFavoriteGame(_id: ID ): User
         addFriend(friendId: ID!): User
-        
+        updatePassword(username: String!, password: String!): User
     }
 `;
 
