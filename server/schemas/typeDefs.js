@@ -43,6 +43,10 @@ const typeDefs = gql`
         commentCount: Int
 
     }
+    type Favorite {
+        _id: ID
+        username: String
+    }
     type Query {
         me: User
         users: [User]
