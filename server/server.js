@@ -1,4 +1,9 @@
 const express = require('express');
+require("dotenv").config()
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
+const bodyParser = require("body-parser")
+const cors = require("cors")
+
 //import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
