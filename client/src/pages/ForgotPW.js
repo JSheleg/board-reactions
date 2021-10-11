@@ -36,11 +36,11 @@ const ForgotPW = () => {
 
                 <br />
 
-                {formState.username ? (
+                {/* {formState.username ? (
                     <div>
                         <SecurityQuestions username={formState.username}/>
                     </div>
-                ) : null}
+                ) : null} */}
             </section>
         </section>
     )
