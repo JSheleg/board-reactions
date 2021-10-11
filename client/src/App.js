@@ -21,6 +21,7 @@ import ForgotPW from './pages/ForgotPW';
 import Footer from './components/Footer';
 import SubmitGame from './pages/SubmitGame';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const httpLink = createHttpLink({
   uri: '/graphql',

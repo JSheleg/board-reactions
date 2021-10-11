@@ -1,6 +1,6 @@
 import { useState } from "react";
-import './App.css';
-import StripeContainer from './components/StripeContainer';
+import StripeContainer from '../components/Donations/StripeContainer';
+
 
 const Donations = () => {
      const [showItem, setShowItem] = useState(false) 
