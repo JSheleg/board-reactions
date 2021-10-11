@@ -26,10 +26,21 @@ const resolvers = {
 
         //get one user
         user: async (parent, { username }) => {
-        return User.findOne({ username })
-            .select('-__v -password')
-            .populate('friends')
-            .populate('games')
+        return User.findOne({ username }).populate([
+            {
+                path:'friends',
+                model:'User'
+            },
+            {
+                path:'game',
+                model:'Game',
+                populate:{
+                    path:'comments',
+                    model:'Comment',
+                }
+            }
+        ])
+        
         }, 
         //get all games
         games: async () => {
