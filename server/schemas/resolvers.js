@@ -121,9 +121,10 @@ const resolvers = {
         //favorite a game
         favoriteGame: async(parents, {gameId}, context) => {
             if(context.user){
+                console.log(context.user.username)
                 const updatedGame = await Game.findByIdAndUpdate(
                     {_id: gameId},
-                    {$addToSet: {favorites: {username}}},
+                    {$addToSet: {favorites:{username: context.user.username}}},
                     {new: true}
                 ).populate('favorites')
                     
