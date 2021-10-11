@@ -7,6 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+
 import AllGames from './pages/AllGames';
 import Contact from './pages/Contact';
 import Donations from './pages/Donations';
@@ -41,6 +42,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <Router>
