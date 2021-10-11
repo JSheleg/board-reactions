@@ -16,7 +16,7 @@ import image from "../assets/uno.png";
 
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from "react-router-dom";
-import { QUERY_GAME } from "../utils/queries";
+import { QUERY_GAMES } from "../utils/queries";
 
 // import { ADD_GAME } from '../utils/mutations'
 // import { useMutation } from '@apollo/client'
@@ -33,10 +33,9 @@ const ExpandMore = styled((props) => {
 }));
 
 const AllGames = () => {
-  const { loading, data } = useQuery(QUERY_GAME);
+  const { loading, data } = useQuery(QUERY_GAMES);
   // const [ gameData, { error } ] = useMutation (ADD_GAME)
 const allGames = data?.games || {}
-console.log(allGames)
 
   const [expandedId, setExpandedId] = React.useState(-1);
 
@@ -54,9 +53,9 @@ console.log(allGames)
         <Grid container spacing={2}>
           {allGames.map((game, i) => {
             return (
-              <Grid item xs={4} i={i} key={i}>
+              <Grid item xs={4} i={i} key={game._id}>
                 <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
-                <Link to='/games/name:'>
+                <Link to={`/games/name:${game._id}`}>
                   <CardMedia
                     component="img"
                     height="140"
