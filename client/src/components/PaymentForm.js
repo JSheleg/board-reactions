@@ -33,7 +33,22 @@ export default function PaymentForm() {
         console.log(error.message)
     }
 }
-    return {
-
+    return (
+        <>
+        {!success ?
+        <form onSubmit={handleSubmit}>
+            <fieldset className="FormGroup">
+                <div className="FormRow">
+                    <CardElement options={CARD_OPTIONS}/>
+                </div>
+            </fieldset>
+            <button>Donate</button>
+        </form>
+        :
+        <div>
+            <h2>You just donated funds! Congrats on supporting the Board Reactions team! Your contribution will help us develop more features and content!</h2>
+        </div>
     }
+    </>
+    )
 }
