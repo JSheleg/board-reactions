@@ -39,7 +39,6 @@ const typeDefs = gql`
         favorites:[Favorite]
         comments:[Comment]
         commentCount: Int
-
     }
     type Favorite {
         _id: ID
