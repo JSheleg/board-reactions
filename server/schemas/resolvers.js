@@ -7,11 +7,22 @@ const resolvers = {
 
         //get all users
         users: async () => {
-            return User.find()
-              .select('-__v -password')
-              .populate('friends')
-              .populate('games');
+            return User.find().populate([
+                {
+                    path: 'friends',
+                    model: 'User'
+                },
+                {
+                  path: 'games',
+                  model: 'Game',
+                  populate: {
+                    path: 'comments',
+                    model: 'Comment',
+                  }
+                }
+              ])
         },
+    
 
         //get one user
         user: async (parent, { username }) => {
