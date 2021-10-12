@@ -47,3 +47,17 @@ mutation updatePassword($username: String!, $password: String!) {
     }
   }
 `;
+
+export const ADD_FRIEND = gql`
+mutation AddFriendMutation($friendId: ID!) {
+  addFriend(friendId: $friendId) {
+      _id
+      username
+      friends {
+        _id
+        username
+      }
+      friendCount
+  }
+}
+`;
