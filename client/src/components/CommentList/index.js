@@ -25,8 +25,8 @@ const CommentList = ({ username, games }) => {
                         <div>
                         {
                             comment.username === username ?
-                                <p key={comment._id}>"{comment.commentText}" on {comment.createdAt}</p> :
-                                null
+                                <p key={comment._id}>"{comment.commentText}" on {comment.createdAt}</p> 
+                                : null
                         }
                         </div>
                     ))}

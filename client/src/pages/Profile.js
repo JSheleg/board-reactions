@@ -1,13 +1,23 @@
 import { useParams, Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { QUERY_USER } from '../utils/queries';
+import { ADD_FRIEND } from '../utils/mutations';
 import FriendList from '../components/FriendList';
 import FavoriteGamesList from '../components/FavoriteGamesList';
 import CommentList from '../components/CommentList';
+import Auth from '../utils/auth';
 
 
 const Profile = () => {
+
+    const [addFriend] = useMutation(ADD_FRIEND);
+
+    // get username of logged in user
+    const loggedInUser = Auth.getLoggedInUsername();
+
+    // check to see if user is logged in
+    const loggedIn = Auth.loggedIn();
 
     //pull username from url
     const { username: userParam } = useParams();
@@ -59,8 +69,26 @@ const Profile = () => {
             }
         }
 
+        const handleAddFriend = async (friendId) => {
+            try {
+                await addFriend({
+                    variables: {friendId: friendId}
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
         return (
             <div>
+                {loggedInUser === userParam ?
+                    <h1>Welcome to your profile, {loggedInUser}!</h1>
+                    : <div>
+                        <h1>Welcome to {userParam}'s profile!</h1>
+                        <button onClick={() => { handleAddFriend(user._id) }}>
+                            + Add Friend
+                        </button>
+                    </div>}
                 <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
                 <FriendList
                     username={user.username}
