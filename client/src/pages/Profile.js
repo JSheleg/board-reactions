@@ -29,6 +29,7 @@ const Profile = () => {
 
     if (!loading) {
         let userFavoriteGames = []
+        let userCommentedGames = []
         // create a variable called favoritedGames and filter out any games where favorite Count is 0;
         const favoriteGames = user.games.filter(game => game.favoritesCount !== 0);
         
@@ -40,9 +41,20 @@ const Profile = () => {
             }
         }
 
+        const commentedGames = user.games.filter(game => game.commentCount !==0);
+
+        for(let i = 0; i < commentedGames.length; i++) {
+            for(let j = 0; j < commentedGames[i].comments.length; j++) {
+                if(commentedGames[i].comments[j].username === userParam) {
+                    userCommentedGames.push(commentedGames[i])
+                }
+            }
+        }
+
+
         console.log('user data', user)
-        console.log('favoriteGames', favoriteGames)
-        console.log('userFavoriteGames', userFavoriteGames)
+        console.log('commentGames', commentedGames)
+        console.log('userCommentGames', userCommentedGames)
         return (
             <div>
                 <Link to='/submitgame'>Submit A Game!</Link>
