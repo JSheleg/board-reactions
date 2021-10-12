@@ -39,6 +39,7 @@ const resolvers = {
             }
 
         ])
+        .populate('friends');
         
         }, 
         //get all games

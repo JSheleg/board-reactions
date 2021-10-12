@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import { QUERY_USERS } from '../utils/queries';
+import { QUERY_USER } from '../utils/queries';
 
 const Profile = () => {
 
@@ -9,24 +9,24 @@ const Profile = () => {
 
     console.log('userParam', userParam)
 
-    const {loading, data} = useQuery(QUERY_USERS)
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: {
+            username: userParam
+        }
+    })
 
-    if(loading) {
-        return(
+    if (loading) {
+        
+        return (
             <div>
                 Loading...
             </div>
         )
     }
 
-    if(!loading) {
-        const userData = data.users.findIndex(user => user.username === userParam)
-
-        console.log('index of user', userData)
-        console.log('data array', data)
-        console.log('user', data.users[51])
-
-        return(
+    if (!loading) {
+        console.log('user data', data)
+        return (
             <div>
                 <Link to='/submitgame'>Submit A Game!</Link>
             </div>
