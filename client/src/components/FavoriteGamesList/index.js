@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const FavoriteGamesList = ({ username, games }) => {
-    if (!games.favorites || !games.favorites.length) {
+    if (!games || !games.length) {
       return <p>{username}, go favorite some games!</p>;
     }
   
