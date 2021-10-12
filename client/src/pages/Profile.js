@@ -61,7 +61,7 @@ const Profile = () => {
 
         return (
             <div>
-                <Link to='/submitgame'>Submit A Game!</Link>
+                <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
                 <FriendList
                     username={user.username}
                     friendCount={user.friendCount}
