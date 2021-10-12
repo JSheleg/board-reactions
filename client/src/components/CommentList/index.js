@@ -14,7 +14,7 @@ const CommentList = ({ username, games }) => {
     return (
         <div>
             <h5>
-                {username}'s {games.length} {games.length === 1 ? 'comment' : 'comments'}
+                {username}'s {games.length === 1 ? 'comment! Click the game name to see the discussion!' : 'comments! Click the game name to see the discussion!'}
             </h5>
             {games.map((game, index) => (
                 <div>
