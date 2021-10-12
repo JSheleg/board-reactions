@@ -3,12 +3,12 @@ body {
   font-family: "Questrial", sans-serif;
   font-size: 18px;
   line-height: 0;
-  /* padding: 2rem; */
-  margin: 2rem;
+  padding: 0;
+  margin: 0;
 }
 
 .navigation-menu {
-  background: #0a58ca;
+  background: #1976d2;
   height: 100%;
   width: 20%;
   padding: 60px 0;
@@ -28,11 +28,11 @@ body {
 }
 
 .navigation-menu li:nth-of-type(2n) {
-  background: #45bbff;
+  background: #4791db;
 }
 
 .navigation-menu li:hover {
-  background: black;
+  background: #115293;
 }
 
 .navigation-menu a {
@@ -44,13 +44,7 @@ body {
   font-size: 3vw;
 }
 
-.navbar {
-  background: #0a58ca;
-  padding: 0px 30px 80px 100px;
-  margin: 2rem;
-  float:right;
-  /* position:relative; */
-}
+
 
 .content {
   width: 80%;
@@ -69,9 +63,9 @@ body {
 /* Use this label to toggle the sliding menu */
 label[for="toggle"] {
   cursor: pointer;
-  font-size: 30px;
-  float:right;
-  margin: 0 5.5rem 0 0;
+  /* font-size: 30px; */
+  /* float:right;
+  margin: 0 5.5rem 0 0; */
 }
 
 /* Slide menu when checkbox is checked */
@@ -82,8 +76,4 @@ input#toggle:checked + ul.navigation-menu {
 /* Also slide content when checkbox is checked */
 input#toggle:checked ~ .content {
   top: -45%;
-}
-
-i {
-  color: #e5e5e5;
 }
