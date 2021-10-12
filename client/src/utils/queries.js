@@ -1,27 +1,75 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_USER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+export const QUERY_USERS = gql`
+query getUsers {
+  users {
+    _id
+    username
+    email
+    questionOne
+    answerOne
+    questionTwo
+    answerTwo
+    friends {
+      _id
       username
-      email
-      questionOne
-      answerOne
-      questionTwo
-      answerTwo
+    }
+    friendCount
+    games {
+      _id
+      game_name
+      favoritesCount
+      favorites {
+        _id
+        username
+      }
       comments {
         _id
         commentText
-        createdAt
         username
+        createdAt
       }
       commentCount
-      friends {
+    }
+    gamesCount
+  }
+}
+`;
+
+export const QUERY_USER = gql`
+query Query($username: String!) {
+  user(username: $username) {
+    _id
+    username
+    email
+    questionOne
+    answerOne
+    questionTwo
+    answerTwo
+    friends {
+      _id
+      username
+    }
+    friendCount
+    games {
+      _id
+      game_name
+      favoritesCount
+      favorites {
+        _id
         username
       }
-      friendCount
+      comments {
+        _id
+        commentText
+        username
+        createdAt
+      }
+      commentCount
     }
+    gamesCount
   }
+}
 `;
 
 export const QUERY_GAMES = gql`
