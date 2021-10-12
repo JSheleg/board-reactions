@@ -3,11 +3,7 @@ import './index.css';
 
 import Auth from '../../utils/auth';
 
-const loggedIn = Auth.loggedIn();
 const loggedInUsername = Auth.getLoggedInUsername();
-
-console.log('logged in', loggedIn)
-console.log('username', loggedInUsername)
 
 const Nav = () => {
     return (

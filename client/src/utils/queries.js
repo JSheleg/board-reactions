@@ -36,6 +36,42 @@ query getUsers {
 }
 `;
 
+export const QUERY_USER = gql`
+query Query($username: String!) {
+  user(username: $username) {
+    _id
+    username
+    email
+    questionOne
+    answerOne
+    questionTwo
+    answerTwo
+    friends {
+      _id
+      username
+    }
+    friendCount
+    games {
+      _id
+      game_name
+      favoritesCount
+      favorites {
+        _id
+        username
+      }
+      comments {
+        _id
+        commentText
+        username
+        createdAt
+      }
+      commentCount
+    }
+    gamesCount
+  }
+}
+`;
+
 export const QUERY_GAMES = gql`
 query games {
   games {
