@@ -4,8 +4,10 @@ import './index.css';
 import Auth from '../../utils/auth';
 
 const loggedIn = Auth.loggedIn();
+const loggedInUsername = Auth.getLoggedInUsername();
 
 console.log('logged in', loggedIn)
+console.log('username', loggedInUsername)
 
 const Nav = () => {
     return (
@@ -39,7 +41,7 @@ const Nav = () => {
                 </li>
                 <li>
                     {/* we will set this to logged in user eventually */}
-                    <Link to='/profile/:username?'>
+                    <Link to={`/profile/${loggedInUsername}`}>
                         Profile
                     </Link>
                 </li>
