@@ -27,9 +27,15 @@ class AuthService {
     return localStorage.getItem('id_token');
   }
 
-  login(idToken) {
+  getLoggedInUsername() {
+    // Retrieves the user token from localStorage
+    return localStorage.getItem('username');
+  }
+
+  login(idToken, username) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
+    localStorage.setItem('username', username)
 
     // window.location.assign('/');
   }
@@ -38,6 +44,7 @@ class AuthService {
     // Clear user token and profile data from localStorage
     // axios.defaults.headers.common["Authorization"] = null;
     localStorage.removeItem('id_token');
+    localStorage.removeItem('username');
     // this will reload the page and reset the state of the application
     window.location.assign('/');
   }
