@@ -1,14 +1,25 @@
 import { Link } from 'react-router-dom';
 
+import { REMOVE_FRIEND } from '../../utils/mutations';
+
 const FriendList = ({ friendCount, username, friends }) => {
+
+  const [deleteFriend] = useMutation(REMOVE_FRIEND);
+
     if (!friends || !friends.length) {
       return <p>{username}, make some friends!</p>;
     }
 
     console.log('friends', friends)
 
-    const removeFriend = (friendId) => {
-
+    const removeFriend = async (friendId) => {
+      try {
+        await deleteFriend({
+          variables: {friendId: friendId}
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   
     return (
