@@ -1,26 +1,15 @@
 import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import "./index.css";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import Auth from "../../utils/auth";
 import { grey } from "@mui/material/colors";
 
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
 const Nav = () => {
   return (
     <div>
-      <input type="checkbox" id="toggle" name="toggle"></input>
-
+      <input type="checkbox" id="toggle" name="toggle" />
       <ul className="navigation-menu">
         <li>
           <Link to="/">Home</Link>
@@ -50,7 +39,7 @@ const Nav = () => {
           <Link to="/donate">Donations</Link>
         </li>
       </ul>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }} name="toggle">
         <Grid
           container
           spacing={0}
@@ -68,5 +57,4 @@ const Nav = () => {
     </div>
   );
 };
-
 export default Nav;
