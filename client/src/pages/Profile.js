@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 import FriendList from '../components/FriendList';
 import FavoriteGamesList from '../components/FavoriteGamesList';
+import CommentList from '../components/CommentList';
 
 
 const Profile = () => {
@@ -51,10 +52,6 @@ const Profile = () => {
             }
         }
 
-
-        console.log('user data', user)
-        console.log('commentGames', commentedGames)
-        console.log('userCommentGames', userCommentedGames)
         return (
             <div>
                 <Link to='/submitgame'>Submit A Game!</Link>
@@ -66,6 +63,10 @@ const Profile = () => {
                 <FavoriteGamesList
                 username={user.username}
                 games={userFavoriteGames}
+                />
+                <CommentList
+                username={user.username}
+                games={userCommentedGames}
                 />
             </div>
         )
