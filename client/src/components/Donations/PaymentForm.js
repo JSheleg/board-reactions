@@ -1,6 +1,6 @@
-import React, { useState} from 'react'
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
+import React, { useState} from 'react'
 
 const CARD_OPTIONS = {
     iconStyle: "solid",
@@ -23,7 +23,8 @@ const CARD_OPTIONS = {
     }
 
 export default function PaymentForm() {
-    const {success, setSuccess } = useState(false)
+    const [success, setSuccess ] = useState(false)
+    console.log(setSuccess)
     const stripe = useStripe()
     const elements = useElements()
 
@@ -37,7 +38,7 @@ export default function PaymentForm() {
     if(!error) {
         try {
             const {id} = paymentMethod
-            const response = await axios.post("http://localhost:3000/payment", {
+            const response = await axios.post("http://localhost:3001/payment", {
                 amount: 2000,
                 id
             })
@@ -62,7 +63,7 @@ export default function PaymentForm() {
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             </fieldset>
-            <button>Donate</button>
+            <button className="donate-button">Donate</button>
         </form>
         :
         <div>
