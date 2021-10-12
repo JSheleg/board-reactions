@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 
 const Login = () => {
 
-    const [formState, setFormState] = useState({ username: '', password: '' });
+    const [formState, setFormState] = useState({ email: '', password: '' });
     const [login, { error }] = useMutation(LOGIN);
 
     const handleChange = (event) => {
@@ -23,12 +23,14 @@ const Login = () => {
         try {
             const mutationResponse = await login({
                 variables: {
-                    username: formState.username,
+                    email: formState.email,
                     password: formState.password
                 }
             });
+
+            const username = mutationResponse.data.login.user.username
             const token = mutationResponse.data.login.token;
-            Auth.login(token);
+            Auth.login(token, username);
         } catch (e) {
             console.log(e);
         }
@@ -41,12 +43,12 @@ const Login = () => {
 
             <form onSubmit={handleFormSubmit}>
                 <div>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="email">Email:</label>
                     <input
-                        name='username'
+                        name='email'
                         type="text"
-                        id="username"
-                        placeholder="username"
+                        id="email"
+                        placeholder="email"
                         onChange={handleChange}
                     />
                 </div>
