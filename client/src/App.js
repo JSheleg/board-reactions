@@ -7,6 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+
 import AllGames from './pages/AllGames';
 import Contact from './pages/Contact';
 import Donations from './pages/Donations';
@@ -20,6 +21,7 @@ import ForgotPW from './pages/ForgotPW';
 import Footer from './components/Footer';
 import SubmitGame from './pages/SubmitGame';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -41,6 +43,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <Router>
