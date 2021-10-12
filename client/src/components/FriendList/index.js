@@ -4,6 +4,12 @@ const FriendList = ({ friendCount, username, friends }) => {
     if (!friends || !friends.length) {
       return <p>{username}, make some friends!</p>;
     }
+
+    console.log('friends', friends)
+
+    const removeFriend = (friendId) => {
+
+    }
   
     return (
       <div>
@@ -11,9 +17,14 @@ const FriendList = ({ friendCount, username, friends }) => {
           {username}'s {friendCount} {friendCount === 1 ? 'friend' : 'friends'}
         </h5>
         {friends.map(friend => (
-          <button key={friend._id}>
+          <div key={friend._id}>
+          <button>
             <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
           </button>
+          <button onClick={removeFriend(friend._id)}>
+          - Remove Friend
+          </button>
+          </div>
         ))}
       </div>
     );
