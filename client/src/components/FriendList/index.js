@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 
 import { REMOVE_FRIEND } from '../../utils/mutations';
 
@@ -13,6 +14,9 @@ const FriendList = ({ friendCount, username, friends }) => {
     console.log('friends', friends)
 
     const removeFriend = async (friendId) => {
+
+      console.log('remove friend method is running')
+
       try {
         await deleteFriend({
           variables: {friendId: friendId}
@@ -32,7 +36,7 @@ const FriendList = ({ friendCount, username, friends }) => {
           <button>
             <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
           </button>
-          <button onClick={removeFriend(friend._id)}>
+          <button onClick={() => {removeFriend(friend._id)}}>
           - Remove Friend
           </button>
           </div>
