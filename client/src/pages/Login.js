@@ -29,14 +29,6 @@ const Login = () => {
     });
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
   const handleFormSubmit = async event => {
     event.preventDefault();
     try {

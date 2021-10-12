@@ -8,7 +8,7 @@ const FavoriteGamesList = ({ username, games }) => {
     return (
       <div>
         <h5>
-          {username}'s {games.favoritesCount} {games.favoritesCount === 1 ? 'favorite game' : 'favorite games'}
+          {username}'s {games.length} {games.length === 1 ? 'favorite game' : 'favorite games'}
         </h5>
         {games.map(game => (
           <button key={game._id}>
