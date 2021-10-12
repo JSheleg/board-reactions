@@ -6,14 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seeders/seeds.js",
-    "watch": "node server.js"
+    "watch": "nodemon server.js",
+    "seed": "node seeders/seeds.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^3.3.0",
+    "apollo-server-express": "2.15.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

@@ -12,10 +12,41 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_GAME } from "../utils/queries";
 
 import image from "../assets/uno.png";
 
-const SingleGame = () => {
+const SingleGame = props => {
+
+  const windowId = window.location.toString().split(':')[window.location.toString().split(':').length - 1];
+  // console.log(windowId)
+
+  // const { loading, data } = useQuery(QUERY_GAME);
+
+  let { gameId: gameId } = useParams();
+
+  gameId = windowId
+
+  const { loading, data } = useQuery(QUERY_GAME, {
+    variables: { gameId: gameId }
+  });
+
+
+  const singleGame = data?.gamebyId || {}
+console.log(singleGame.game_name)
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
       <div>
     <Grid item xs={12} pt={25} pb={2} pl={50}>
@@ -29,13 +60,19 @@ const SingleGame = () => {
 
         <CardContent>
           <Typography gutterBottom variant="h4" component="div">
-            game name
+            {singleGame.game_name}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            game category
+          {singleGame.category}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-              Description
+          <Typography gutterBottom variant="h7" component="div">
+              Players: {singleGame.min_number_of_players} to {singleGame.max_number_of_players}
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
+              Duration: {singleGame.avg_min_game_time} to  {singleGame.avg_max_game_time} min
+          </Typography>
+          <Typography gutterBottom variant="h7" component="div">
+               {singleGame.game_description}
           </Typography>
           <IconButton aria-label="add to favorites">
                       <FavoriteIcon />
@@ -44,7 +81,38 @@ const SingleGame = () => {
       </Card>
 </Grid>
 
-<Grid item xs={12} pt={0} pb={0} pl={70}>
+
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "40ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        pl="25rem"
+      >
+        <div>
+        <h1>Leave a Comment</h1>
+          <TextField
+            id="filled-multiline-static"
+            label=""
+            multiline
+            rows={10}
+            defaultValue=""
+            placeholder="Comment"
+            variant="filled"
+          />
+        </div>
+        <Stack direction="row" spacing={2} pl='7.5rem'>
+
+      <Button variant="contained" color="success">
+        Submit
+      </Button>
+
+    </Stack>
+      </Box>
+
+<Grid item xs={12} pt={0} pb={0} pl={50}>
       <List sx={{ width: "100%", maxWidth: 700, bgcolor: "background.paper" }}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
@@ -60,101 +128,14 @@ const SingleGame = () => {
                   variant="body2"
                   color="text.primary"
                 >
-                  Ali Connors
+                  {singleGame.comments.username}
                 </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
+                {singleGame.comments.commentText}
               </React.Fragment>
             }
           />
         </ListItem>
         <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary= {<FavoriteIcon />}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={<FavoriteIcon />}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Sandra Adams
-                </Typography>
-                {" — Do you have Paris recommendations? Have you ever…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={<FavoriteIcon />}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary={<FavoriteIcon />}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
       </List>
       </Grid>
       </div>
