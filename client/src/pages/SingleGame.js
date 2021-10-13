@@ -26,14 +26,12 @@ import image from "../assets/uno.png";
 
 const SingleGame = props => {
 
-  const windowId = window.location.toString().split(':')[window.location.toString().split(':').length - 1];
+  // const windowId = window.location.toString().split(':')[window.location.toString().split(':').length - 1];
   // console.log(windowId)
 
   // const { loading, data } = useQuery(QUERY_GAME);
 
-  let { gameId: gameId } = useParams();
-
-  gameId = windowId
+  let { gameId: gameId} = useParams();
 
   const { loading, data } = useQuery(QUERY_GAME, {
     variables: { gameId: gameId }

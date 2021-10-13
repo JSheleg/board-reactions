@@ -55,7 +55,7 @@ const allGames = data?.games || {}
             return (
               <Grid item xs={4} i={i} key={game._id}>
                 <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
-                <Link to={`/games/name:${game._id}`}>
+                <Link to={`/games/${game._id}`}>
                   <CardMedia
                     component="img"
                     height="140"
