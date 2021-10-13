@@ -11,12 +11,10 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+// import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { useTheme } from "@mui/material/styles";
+// import Select from "@mui/material/Select";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -195,17 +193,17 @@ const Signup = () => {
               </Item>
 
               <Item>
-              <FormControl sx={{ m: 2, width: 250 }}>
+              <FormControl sx={{ m: 2, width: 275 }}>
                 <InputLabel value="select" sx={{ m: 1, }}>Select Security Question 1</InputLabel>
-                <Select sx={{ fontSize: 11, fontWeight: 'medium' }} id="questionOne" onClick={handleClick}>
+                <select sx={{ fontSize: 11, fontWeight: 'medium' }} id="questionOne" onClick={handleClick}>
                   {securityQuestionsOne.map((question, index) => {
                     return (
-                      <MenuItem sx={{ fontSize: 15 }} value={question} key={index}>
+                      <option sx={{ fontSize: 15 }} value={question} key={index} id={index}>
                         {question}
-                      </MenuItem>
+                      </option>
                     );
                   })}
-                </Select>
+                </select>
                 </FormControl>
               </Item>
               <Item>
@@ -230,23 +228,23 @@ const Signup = () => {
               </Item>
 
               <Item>
-                <FormControl sx={{ m: 2, width: 250 }}>
+                <FormControl sx={{ m: 2, width: 275 }}>
                   <InputLabel sx={{ m: 1, verticalAlign: 'center' }} value="select" >
                     Select Security Question 2
                   </InputLabel>
-                  <Select sx={{ fontSize: 11, fontWeight: 'medium' }}
+                  <select sx={{ fontSize: 11, fontWeight: 'medium' }}
                     id="questionTwo"
                     onClick={handleClick}
                   >
                     {/* <option value='select'>Select Security Question 2</option> */}
                     {securityQuestionsTwo.map((question, index) => {
                       return (
-                        <MenuItem sx={{ fontSize: 15 }} value={question} key={index}>
+                        <option sx={{ fontSize: 15 }} value={question} key={index}>
                           {question}
-                        </MenuItem>
+                        </option>
                       );
                     })}
-                  </Select>
+                  </select>
                 </FormControl>
               </Item>
               <Item>

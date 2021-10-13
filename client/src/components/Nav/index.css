@@ -11,7 +11,7 @@ body {
   background: #1976d2;
   height: 100%;
   width: 20%;
-  padding: 60px 0;
+  padding: 1vw 0;
   margin: 0;
   list-style: none;
   text-align: center;
@@ -20,7 +20,7 @@ body {
   top: 0;
   transition: all 0.5s;
   z-index: 1;
-  font-size: 60px;
+  font-size: 10px;
 }
 
 .navigation-menu li {
@@ -41,10 +41,8 @@ body {
   text-decoration: none;
   display: block;
   transition: all 0.3s;
-  font-size: 3vw;
+  font-size: 2.5vw;
 }
-
-
 
 .content {
   width: 80%;
