@@ -12,7 +12,7 @@ const FavoriteGamesList = ({ username, games }) => {
         </h5>
         {games.map(game => (
           <button key={game._id}>
-            <Link to={`/games/name:${game._id}`}>{game.game_name}</Link>
+            <Link to={`/games/${game._id}`}>{game.game_name}</Link>
           </button>
         ))}
       </div>

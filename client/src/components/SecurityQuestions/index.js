@@ -70,7 +70,9 @@ const SecurityQuestions = (props) => {
             <div id='update_pw_div'>
             {formState.answerOne === user.answerOne && formState.answerTwo === user.answerTwo ? (
                 <UpdatePw username={props.username}/>
-            ) : (
+            ) : formState.answerOne === '' || formState.answerTwo === '' ? 
+            null 
+            : (
                 <p>Incorrect Security Answers. Please Try Again.</p>
             )}
             </div>

@@ -95,8 +95,10 @@ const Signup = () => {
         answerTwo: formState.answerTwo,
       },
     });
+
+    const username = formState.username
     const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
+    Auth.login(token, username);
   };
 
   return (

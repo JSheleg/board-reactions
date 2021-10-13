@@ -32,6 +32,19 @@ const Profile = () => {
     //set data to variable user
     const user = data?.user || {};
 
+    console.log(user)
+
+    const handleAddFriend = async (friendId) => {
+        try {
+            await addFriend({
+                variables: { friendId: friendId }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    // if data is still loading, display a loading div
     if (loading) {
 
         return (
@@ -41,13 +54,15 @@ const Profile = () => {
         )
     }
 
+    // if not loading and data is returned... 
     if (!loading) {
-        let userFavoriteGames = []
-        let userCommentedGames = []
 
-        // create a variable called favoriteGames and filter out any games where favorite Count is 0;
+        //check if the user has games
         if (user.games) {
+            let userFavoriteGames = []
+            let userCommentedGames = []
 
+            // create a variable called favoriteGames and filter out any games where favorite Count is 0;
             const favoriteGames = user.games.filter(game => game.favoritesCount !== 0);
 
             // for all the games that have favorites, push only the games the current user favorited to userFavoriteGames array
@@ -71,50 +86,63 @@ const Profile = () => {
                 }
             }
 
-            const handleAddFriend = async (friendId) => {
-                try {
-                    await addFriend({
-                        variables: { friendId: friendId }
-                    })
-                } catch (e) {
-                    console.log(e)
-                }
-            }
+            // check if user is loggedIn -- scenario: user has games and there is a logged in user
+            if (loggedIn) {
+                return (
+                    <div>
+                        {/* if logged in user = the username in the URL, display one header, if not, display another header and include add friend button */}
+                        {loggedInUser === userParam ?
+                            <h1>Welcome to your profile, {loggedInUser}!</h1>
+                            : <div>
+                                <h1>Welcome to {userParam}'s profile!</h1>
+                                <button onClick={() => { handleAddFriend(user._id) }}>
+                                    + Add Friend
+                                </button>
+                            </div>}
+                        {/* if logged in user = the username in the URL, display a link to submit a game or don't if you're on another user's page */}
+                        {loggedInUser === userParam ?
+                            <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
+                            : null
+                        }
 
-            return (
-                <div>
-                    {loggedInUser === userParam ?
-                        <h1>Welcome to your profile, {loggedInUser}!</h1>
-                        : <div>
-                            <h1>Welcome to {userParam}'s profile!</h1>
-                            <button onClick={() => { handleAddFriend(user._id) }}>
-                                + Add Friend
-                            </button>
-                        </div>}
-                    <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
-                    <FriendList
-                        username={user.username}
-                        friendCount={user.friendCount}
-                        friends={user.friends}
-                    />
-                    <FavoriteGamesList
-                        username={user.username}
-                        games={userFavoriteGames}
-                    />
-                    <CommentList
-                        username={user.username}
-                        games={userCommentedGames}
-                    />
-                </div>
-            )
+                        <FriendList
+                            username={user.username}
+                            friendCount={user.friendCount}
+                            friends={user.friends}
+                        />
+                        <FavoriteGamesList
+                            username={user.username}
+                            games={userFavoriteGames}
+                        />
+                        <CommentList
+                            username={user.username}
+                            games={userCommentedGames}
+                        />
+                    </div>
+                )
+            } else {
+                // if user is not logged in but there's data to display
+                return (
+                    <div>
+                        <h1>Welcome to {userParam}'s profile!</h1>
+                        <FriendList
+                            username={user.username}
+                            friendCount={user.friendCount}
+                            friends={user.friends}
+                        />
+                        <FavoriteGamesList
+                            username={user.username}
+                            games={userFavoriteGames}
+                        />
+                        <CommentList
+                            username={user.username}
+                            games={userCommentedGames}
+                        />
+                    </div>
+                )
+            }
         }
     }
-
-    return(
-        <h1>
-            Go browse the website and do things to display things here
-        </h1>
-    )
 }
 
 export default Profile;

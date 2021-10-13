@@ -9,7 +9,6 @@ import { setContext } from '@apollo/client/link/context';
 
 
 import AllGames from './pages/AllGames';
-import Contact from './pages/Contact';
 import Donations from './pages/Donations';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -55,7 +54,6 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/games" component={AllGames} />
             <Route exact path="/games/:gameId" component={SingleGame} />
-            <Route exact path="/contact" component={Contact} />
             <Route exact path="/profile/:username?" component={Profile} />
             <Route exact path="/submitgame" component={SubmitGame} />
             <Route exact path="/donate" component={Donations} />
