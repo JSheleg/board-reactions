@@ -33,7 +33,6 @@ const ExpandMore = styled((props) => {
 
 const AllGames = () => {
   const { loading, data } = useQuery(QUERY_GAMES);
-  // const [ gameData, { error } ] = useMutation (ADD_GAME)
   const allGames = data?.games || {};
 
   const [expandedId, setExpandedId] = React.useState(-1);
@@ -48,12 +47,13 @@ const AllGames = () => {
 
   return (
     <div className="gameCardContainer">
-      <Box sx={{ flexGrow: 6 }}>
+      <h1 className="homepageTitle">GAME SELECTION!</h1>
+      <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {allGames.map((game, i) => {
             return (
               <Grid item xs={4} i={i} key={game._id}>
-                <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
+                <Card sx={{ maxWidth: 1000, maxHeight: 9999 }}>
                   <Link to={`/games/${game._id}`}>
                     <CardMedia
                       component="img"
