@@ -68,9 +68,11 @@ const allGames = data?.games || {}
                     <Typography gutterBottom variant="h4" component="div">
                       {game.game_name}
                     </Typography>
+                    
                     <Typography gutterBottom variant="h5" component="div">
                       {game.category_id}
                     </Typography>
+
                     <Typography
                       gutterBottom
                       variant="h5"

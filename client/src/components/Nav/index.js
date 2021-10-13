@@ -5,7 +5,8 @@ import Grid from "@mui/material/Grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import Auth from "../../utils/auth";
 import { grey } from "@mui/material/colors";
-
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
