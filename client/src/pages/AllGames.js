@@ -12,7 +12,6 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import image from "../assets/uno.png";
 
 import { useQuery } from "@apollo/react-hooks";
 import { Link } from "react-router-dom";
@@ -59,8 +58,9 @@ const AllGames = () => {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={image}
-                      alt="boardgame image"
+                      image={require(`../assets/${game.game_name}.jpg`).default}
+                      alt={game.game_name}
+                      key={game.game_name}
                     />
                   </Link>
 

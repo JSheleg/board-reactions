@@ -15,7 +15,6 @@ import { useQuery } from "@apollo/react-hooks";
 import { QUERY_GAME, QUERY_GAMES, QUERY_ME } from "../utils/queries";
 
 import GameCommentList from "../components/GameCommentList";
-import image from "../assets/uno.png";
 import Auth from "../utils/auth";
 import AddCommentForm from "../components/AddCommentForm";
 
@@ -24,7 +23,6 @@ import AddCommentForm from "../components/AddCommentForm";
 const SingleGame = (props) => {
   // get username of logged in user
   const loggedInUser = Auth.getLoggedInUsername();
-  console.log(loggedInUser);
 
   let { gameId: gameId } = useParams();
 
@@ -47,11 +45,15 @@ const SingleGame = (props) => {
           alignItems="center"
         >
           <Grid item xs={12}>
+
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
             <Card sx={{ maxWidth: 1000, maxHeight: 9999 }}>
               <CardMedia
                 component="img"
                 height="500"
-                image={image}
+                image={ require(`../assets/${singleGame.game_name}.jpg`).default }
                 alt="boardgame image"
               />
 
@@ -78,6 +80,7 @@ const SingleGame = (props) => {
                 </IconButton>
               </CardContent>
             </Card>
+          )}
           </Grid>
 
           <Grid item xs={12} sx={{ width: 3 / 5 }}>

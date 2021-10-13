@@ -138,7 +138,7 @@ db.once('open', async() => {
           "Fully referred to as the 500 Cribbage Thomas System, this game sets out to develop and modernize the classic game of Cribbage with several refinements. Players peg points on an updated version of the original Cribbage board, with separate tracks for points scored in the Play, Hand, and Crib. Additionally, the straight-flush is recognized as an independent scoring combination, and the play of the cards until Go is extended to a limit of 34 instead of 31.",
       },
       {
-        game_name: "#demidancer",
+        game_name: "demidancer",
         category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 2,
@@ -308,7 +308,7 @@ db.once('open', async() => {
           "In Sheriff of Nottingham, players will not only be able to experience Nottingham as a merchant of the city, but each turn one player will step into the shoes of the Sheriff himself. Players declare goods they wish to bring into the city, goods that are secretly stored in their burlap sack. The Sheriff must then determine who gets into the city with their goods, who gets inspected, and who may have their goods confiscated!",
       },
       {
-        game_name: "Time's Up! Title Recall!",
+        game_name: "Time's Up Title Recall",
         category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 18,
