@@ -59,6 +59,7 @@ const Profile = () => {
 
         //check if the user has games
         if (user.games) {
+            console.log('user games exist')
             let userFavoriteGames = []
             let userCommentedGames = []
 
@@ -142,6 +143,51 @@ const Profile = () => {
                 )
             }
         }
+    }
+
+    // if no data exits...
+    if (loggedIn) {
+        return (
+            <div>
+                {/* if logged in user = the username in the URL, display one header, if not, display another header and include add friend button */}
+                {loggedInUser === userParam ?
+                    <h1>Welcome to your profile, {loggedInUser}!</h1>
+                    : <div>
+                        <h1>Welcome to {userParam}'s profile!</h1>
+                        <button onClick={() => { handleAddFriend(user._id) }}>
+                            + Add Friend
+                        </button>
+                    </div>}
+                {/* if logged in user = the username in the URL, display a link to submit a game or don't if you're on another user's page */}
+                {loggedInUser === userParam ?
+                    <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
+                    : null
+                }
+                {loggedInUser === userParam ?
+                    <div>
+                        <p>{loggedInUser}, make some friends!</p>
+                        <p>{loggedInUser}, go favorite some games!</p>
+                        <p>{loggedInUser}, go comment on some games!</p>
+                    </div>
+                    :
+                    <div>
+                        <p>{userParam} has not added any friends!</p>
+                        <p>{userParam} has not favorited any games!</p>
+                        <p>{userParam} has not commented on any games!</p>
+                    </div>
+                }
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <h1>Welcome to {userParam}'s profile!</h1>
+                <p>{userParam} has not added any friends!</p>
+                <p>{userParam} has not favorited any games!</p>
+                <p>{userParam} has not commented on any games!</p>
+
+            </div>
+        )
     }
 }
 
