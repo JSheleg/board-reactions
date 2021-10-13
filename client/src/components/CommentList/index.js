@@ -19,7 +19,7 @@ const CommentList = ({ username, games }) => {
             {games.map((game, index) => (
                 <div>
                     <button key={game._id}>
-                        <Link to={`/games/name:${game._id}`}>{game.game_name}</Link>
+                        <Link to={`/games/${game._id}`}>{game.game_name}</Link>
                     </button>
                     {games[index].comments.map(comment => (
                         <div>

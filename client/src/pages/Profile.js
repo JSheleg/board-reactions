@@ -32,6 +32,8 @@ const Profile = () => {
     //set data to variable user
     const user = data?.user || {};
 
+    console.log(user)
+
     const handleAddFriend = async (friendId) => {
         try {
             await addFriend({
@@ -97,12 +99,32 @@ const Profile = () => {
                                     + Add Friend
                                 </button>
                             </div>}
-                            {/* if logged in user = the username in the URL, display a link to submit a game or don't if you're on another user's page */}
-                        {loggedInUser === userParam ? 
-                        <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
-                        : null
-                        }    
-                        
+                        {/* if logged in user = the username in the URL, display a link to submit a game or don't if you're on another user's page */}
+                        {loggedInUser === userParam ?
+                            <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
+                            : null
+                        }
+
+                        <FriendList
+                            username={user.username}
+                            friendCount={user.friendCount}
+                            friends={user.friends}
+                        />
+                        <FavoriteGamesList
+                            username={user.username}
+                            games={userFavoriteGames}
+                        />
+                        <CommentList
+                            username={user.username}
+                            games={userCommentedGames}
+                        />
+                    </div>
+                )
+            } else {
+                // if user is not logged in but there's data to display
+                return (
+                    <div>
+                        <h1>Welcome to {userParam}'s profile!</h1>
                         <FriendList
                             username={user.username}
                             friendCount={user.friendCount}
@@ -121,12 +143,6 @@ const Profile = () => {
             }
         }
     }
-
-    return (
-        <h1>
-            Go browse the website and do things to display things here
-        </h1>
-    )
 }
 
 export default Profile;
