@@ -14,30 +14,39 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_GAME } from "../utils/queries";
 
 import image from "../assets/uno.png";
+import { minWidth } from "@mui/system";
 
-const SingleGame = props => {
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
+const SingleGame = (props) => {
   // const windowId = window.location.toString().split(':')[window.location.toString().split(':').length - 1];
   // console.log(windowId)
 
   // const { loading, data } = useQuery(QUERY_GAME);
 
-  let { gameId: gameId} = useParams();
+  let { gameId: gameId } = useParams();
 
   const { loading, data } = useQuery(QUERY_GAME, {
     variables: { gameId: gameId },
   });
 
   const singleGame = data?.gamebyId || {};
-  // console.log(singleGame.comments[0].username);
+  console.log(singleGame.comments);
+  const allComments = singleGame.comments;
 
   if (loading) {
     return <div>Loading...</div>;
@@ -45,11 +54,11 @@ const SingleGame = props => {
 
   return (
     <div>
-      <Box component="form" sx={{ flexGrow: 1 }}>
-      <Grid
+      <Box sx={{ flexGrow: 1, m: 2 }}>
+        <Grid
           container
-          spacing={0}
-          direction="row"
+          spacing={1}
+          direction="column"
           justifyContent="center"
           alignItems="center"
         >
@@ -87,58 +96,65 @@ const SingleGame = props => {
             </Card>
           </Grid>
 
-          <Grid item xs={12}>
-            <div>
+          <Grid item xs={12} sx={{ width: 3/5 }} >
+            <Item>
               <h1>Leave a Comment</h1>
               <TextField
                 id="filled-multiline-static"
                 label=""
                 multiline
-                rows={10}
+                rows={5}
                 defaultValue=""
                 placeholder="Comment"
                 variant="filled"
+                fullWidth
               />
-            </div>
-            <Stack direction="row" spacing={2} pl="7.5rem">
+            </Item>
+
+            <Item>
               <Button variant="contained" color="success">
                 Submit
               </Button>
-            </Stack>
+            </Item>
           </Grid>
 
-          <Grid item xs={12}>
-            
-            <List
-              sx={{ width: "100%", maxWidth: 700, bgcolor: "background.paper" }}
-            >
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={<FavoriteIcon />}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        sx={{ display: "inline" }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                      >
-                        {singleGame.comments[0].username}
-                      </Typography>
+          <Grid item xs={12} sx={{ width: 3/5 }}>
+            {allComments.map((comment, i) => {
+              return (
+                <List
+                  sx={{
+                    width: "100%",
+                    maxWidth: 700,
+                    bgcolor: "background.paper",
+                  }}
+                  key={i}
+                >
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar alt="Remy Sharp" src="" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={<FavoriteIcon />}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                          >
+                            {comment.username}
+                          </Typography>
 
-                      <Typography>
-                        "{singleGame.comments[0].commentText}
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </List>
-
+                          <Typography>"{comment.commentText}</Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </List>
+              );
+            })}
           </Grid>
         </Grid>
       </Box>
