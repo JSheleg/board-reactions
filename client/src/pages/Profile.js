@@ -46,66 +46,75 @@ const Profile = () => {
         let userCommentedGames = []
 
         // create a variable called favoriteGames and filter out any games where favorite Count is 0;
-        const favoriteGames = user.games.filter(game => game.favoritesCount !== 0);
+        if (user.games) {
 
-        // for all the games that have favorites, push only the games the current user favorited to userFavoriteGames array
-        for (let i = 0; i < favoriteGames.length; i++) {
-            for (let j = 0; j < favoriteGames[i].favorites.length; j++) {
-                if (favoriteGames[i].favorites[j].username === userParam) {
-                    userFavoriteGames.push(favoriteGames[i])
+            const favoriteGames = user.games.filter(game => game.favoritesCount !== 0);
+
+            // for all the games that have favorites, push only the games the current user favorited to userFavoriteGames array
+            for (let i = 0; i < favoriteGames.length; i++) {
+                for (let j = 0; j < favoriteGames[i].favorites.length; j++) {
+                    if (favoriteGames[i].favorites[j].username === userParam) {
+                        userFavoriteGames.push(favoriteGames[i])
+                    }
                 }
             }
-        }
 
-        // create a variable called commentedGames and filter out any games where comment Count is 0;
-        const commentedGames = user.games.filter(game => game.commentCount !== 0);
+            // create a variable called commentedGames and filter out any games where comment Count is 0;
+            const commentedGames = user.games.filter(game => game.commentCount !== 0);
 
-        // for all the games that have comments, push only the games the current user commented on to usercommentedGames array
-        for (let i = 0; i < commentedGames.length; i++) {
-            for (let j = 0; j < commentedGames[i].comments.length; j++) {
-                if (commentedGames[i].comments[j].username === userParam) {
-                    userCommentedGames.push(commentedGames[i])
+            // for all the games that have comments, push only the games the current user commented on to usercommentedGames array
+            for (let i = 0; i < commentedGames.length; i++) {
+                for (let j = 0; j < commentedGames[i].comments.length; j++) {
+                    if (commentedGames[i].comments[j].username === userParam) {
+                        userCommentedGames.push(commentedGames[i])
+                    }
                 }
             }
-        }
 
-        const handleAddFriend = async (friendId) => {
-            try {
-                await addFriend({
-                    variables: {friendId: friendId}
-                })
-            } catch (e) {
-                console.log(e)
+            const handleAddFriend = async (friendId) => {
+                try {
+                    await addFriend({
+                        variables: { friendId: friendId }
+                    })
+                } catch (e) {
+                    console.log(e)
+                }
             }
-        }
 
-        return (
-            <div>
-                {loggedInUser === userParam ?
-                    <h1>Welcome to your profile, {loggedInUser}!</h1>
-                    : <div>
-                        <h1>Welcome to {userParam}'s profile!</h1>
-                        <button onClick={() => { handleAddFriend(user._id) }}>
-                            + Add Friend
-                        </button>
-                    </div>}
-                <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
-                <FriendList
-                    username={user.username}
-                    friendCount={user.friendCount}
-                    friends={user.friends}
-                />
-                <FavoriteGamesList
-                    username={user.username}
-                    games={userFavoriteGames}
-                />
-                <CommentList
-                    username={user.username}
-                    games={userCommentedGames}
-                />
-            </div>
-        )
+            return (
+                <div>
+                    {loggedInUser === userParam ?
+                        <h1>Welcome to your profile, {loggedInUser}!</h1>
+                        : <div>
+                            <h1>Welcome to {userParam}'s profile!</h1>
+                            <button onClick={() => { handleAddFriend(user._id) }}>
+                                + Add Friend
+                            </button>
+                        </div>}
+                    <Link to='/submitgame'>Didn't see a game you like listed on the all games page? Submit A Game!</Link>
+                    <FriendList
+                        username={user.username}
+                        friendCount={user.friendCount}
+                        friends={user.friends}
+                    />
+                    <FavoriteGamesList
+                        username={user.username}
+                        games={userFavoriteGames}
+                    />
+                    <CommentList
+                        username={user.username}
+                        games={userCommentedGames}
+                    />
+                </div>
+            )
+        }
     }
+
+    return(
+        <h1>
+            Go browse the website and do things to display things here
+        </h1>
+    )
 }
 
 export default Profile;

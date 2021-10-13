@@ -54,7 +54,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/games" component={AllGames} />
-            <Route exact path="/games/:name" component={SingleGame} />
+            <Route exact path="/games/:gameId" component={SingleGame} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/profile/:username?" component={Profile} />
             <Route exact path="/submitgame" component={SubmitGame} />
