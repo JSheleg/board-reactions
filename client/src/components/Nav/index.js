@@ -25,49 +25,43 @@ const Nav = () => {
   return (
     <div>
       <input type="checkbox" id="toggle" name="toggle"></input>
-        {loggedIn ? (
-          <ul className="navigation-menu">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/" onClick={() => Auth.logout()}>
-                Logout
-              </Link>
-            </li>
-            <li>
-              <Link to="/games">Games</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li>
-              {/* we will set this to logged in user eventually */}
-              <Link to={`/profile/${loggedInUsername}`}>Profile</Link>
-            </li>
-            <li>
-              <Link to="/submitgame">Add Game</Link>
-            </li>
-            <li>
-              <Link to="/donate">Donations</Link>
-            </li>
-          </ul>
-        ) : (
-          <ul className="navigation-menu">
+      {loggedIn ? (
+        <ul className="navigation-menu">
           <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/games">Games</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={() => Auth.logout()}>
+              Logout
+            </Link>
+          </li>
+          <li>
+            <Link to="/games">Games</Link>
+          </li>
+          <li>
+            {/* we will set this to logged in user eventually */}
+            <Link to={`/profile/${loggedInUsername}`}>Profile</Link>
+          </li>
+          <li>
+            <Link to="/submitgame">Add Game</Link>
+          </li>
+          <li>
+            <Link to="/donate">Donations</Link>
+          </li>
         </ul>
-        )}
+      ) : (
+        <ul className="navigation-menu">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/games">Games</Link>
+          </li>
+        </ul>
+      )}
       <Box sx={{ flexGrow: 1 }}>
         <Grid
           container
