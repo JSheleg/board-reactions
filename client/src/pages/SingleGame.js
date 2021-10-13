@@ -81,11 +81,15 @@ const SingleGame = (props) => {
           </Grid>
 
           <Grid item xs={12} sx={{ width: 3 / 5 }}>
-            <AddCommentForm gameId={gameId} />
+            <AddCommentForm gameId={gameId} allComments={allComments} />
           </Grid>
 
           <Grid item xs={12} sx={{ width: 3 / 5 }}>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
             <GameCommentList allComments={allComments} />
+          )}
           </Grid>
         </Grid>
       </Box>

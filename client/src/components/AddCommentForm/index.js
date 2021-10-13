@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_COMMENT } from '../../utils/mutations';
+import { QUERY_GAMES } from '../../utils/queries';
+import { QUERY_ME } from '../../utils/queries';
+
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -13,11 +16,35 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
-const AddCommentForm = ({ gameId }) => {
+const AddCommentForm = ({ gameId , allComments }) => {
 
-    const [commentText, setText] = useState("");
+    const [commentText, setText] = useState('');
     const [characterCount, setCharacterCount] = useState(0);
-    const [addComment] = useMutation(ADD_COMMENT);
+
+    // const [addComment] = useMutation(ADD_COMMENT);
+
+    const [addComment, { error }] = useMutation(ADD_COMMENT, {
+        update(cache, { data: { addComment } }) {
+          try {
+            // update thought array's cache
+            // could potentially not exist yet, so wrap in a try/catch
+            const { comments } = cache.readQuery({ query: QUERY_GAMES });
+            cache.writeQuery({
+              query: QUERY_GAMES,
+              data: { comments: [addComment, ...comments] }
+            });
+          } catch (e) {
+            console.error(e);
+          }
+    
+          // update me object's cache
+          const { me } = cache.readQuery({ query: QUERY_ME });
+          cache.writeQuery({
+            query: QUERY_ME,
+            data: { me: { ...me, comments: [...me.comments, addComment] } }
+          });
+        }
+      });    
   
 
       // update state based on form input changes

@@ -11,9 +11,9 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const GameCommentList = ({ allComments }) => {
 
-    // if (!allComments.length) {
-    //     return <h3>No Comments Yet</h3>;
-    //   }
+    if (!allComments.length) {
+        return <h3>No Comments Yet</h3>;
+      }
 
 return (
     <div>
