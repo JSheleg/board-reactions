@@ -29,21 +29,23 @@ const Login = () => {
     });
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
     try {
       const mutationResponse = await login({
         variables: {
           email: formState.email,
-          password: formState.password,
-        },
+          password: formState.password
+        }
       });
+
+      const username = mutationResponse.data.login.user.username
       const token = mutationResponse.data.login.token;
-      Auth.login(token);
+      Auth.login(token, username);
     } catch (e) {
       console.log(e);
     }
-  };
+  }
 
   return (
     <section>
@@ -91,8 +93,8 @@ const Login = () => {
                   type="password"
                   autoComplete="current-password"
                 />
-                </Item>
-                <Item>
+              </Item>
+              <Item>
                 {error ? (
                   <div>
                     <h7 className="error-message">The provided credentials are incorrect</h7>
@@ -101,10 +103,10 @@ const Login = () => {
               </Item>
 
               <Item>
-                  {/* <button type="submit">Login</button> */}
-                  <Button onClick={handleFormSubmit} variant="contained" color="success">
-                    Login
-                  </Button>
+                {/* <button type="submit">Login</button> */}
+                <Button onClick={handleFormSubmit} variant="contained" color="success">
+                  Login
+                </Button>
               </Item>
               <Item>
                 <h5>

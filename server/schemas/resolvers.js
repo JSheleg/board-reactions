@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Game, Comment, User, Favorite }  = require('../models');
 const { signToken } = require('../utils/auth');
+const bcrypt = require('bcrypt');
 
 const resolvers = {
     Query: {
@@ -39,6 +40,7 @@ const resolvers = {
             }
 
         ])
+        .populate('friends');
         
         }, 
         //get all games
@@ -170,6 +172,9 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in');
         },
         updatePassword: async (parent, {username, password}, context) => {
+
+            const saltRounds = 10;
+            password = await bcrypt.hash(password, saltRounds);
 
             const updatedUser = await User.findOneAndUpdate(
                 {username: username},

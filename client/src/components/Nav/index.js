@@ -6,6 +6,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Auth from "../../utils/auth";
 import { grey } from "@mui/material/colors";
 
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+const loggedInUsername = Auth.getLoggedInUsername();
+
 const Nav = () => {
   return (
     <div>
@@ -30,7 +40,7 @@ const Nav = () => {
         </li>
         <li>
           {/* we will set this to logged in user eventually */}
-          <Link to="/profile/:username">Profile</Link>
+          <Link to={`/profile/${loggedInUsername}`}>Profile</Link>
         </li>
         <li>
           <Link to="/submitgame">Add Game</Link>
