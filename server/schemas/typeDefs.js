@@ -11,6 +11,7 @@ const typeDefs = gql`
         answerOne: String
         questionTwo: String
         answerTwo: String
+        image: String
         friends: [User]
         friendCount: Int
         games: [Game]
@@ -71,8 +72,7 @@ const typeDefs = gql`
         addFriend(friendId: ID!): User
         updatePassword(username: String!, password: String!): User
         deleteFriend(friendId:ID!):User
-
-
+        addProfilePicture(image: String!): User
     }
 `;
 // does the updatedPassword above need to have <Auth> at the end instead of <User>
