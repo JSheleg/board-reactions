@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/JSheleg/board-reactions/issues"
   },
-  "homepage": "https://github.com/JSheleg/board-reactions#readme"
+  "homepage": "https://github.com/JSheleg/board-reactions#readme",
+  "dependencies": {
+    "concurrently": "^6.3.0"
+  }
 }
