@@ -1,42 +1,30 @@
-import * as React from "react";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
+
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-import { QUERY_GAME } from "../utils/queries";
+import { QUERY_GAME, QUERY_GAMES, QUERY_ME } from "../utils/queries";
 
+import GameCommentList from "../components/GameCommentList";
 import image from "../assets/uno.png";
-import { minWidth } from "@mui/system";
+import Auth from "../utils/auth";
+import AddCommentForm from "../components/AddCommentForm";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+
 
 const SingleGame = (props) => {
-  // const windowId = window.location.toString().split(':')[window.location.toString().split(':').length - 1];
-  // console.log(windowId)
-
-  // const { loading, data } = useQuery(QUERY_GAME);
+  // get username of logged in user
+  const loggedInUser = Auth.getLoggedInUsername();
+  console.log(loggedInUser);
 
   let { gameId: gameId } = useParams();
 
@@ -45,12 +33,8 @@ const SingleGame = (props) => {
   });
 
   const singleGame = data?.gamebyId || {};
-  console.log(singleGame.comments);
-  const allComments = singleGame.comments;
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const allComments = singleGame.comments;
 
   return (
     <div>
@@ -96,65 +80,12 @@ const SingleGame = (props) => {
             </Card>
           </Grid>
 
-          <Grid item xs={12} sx={{ width: 3/5 }} >
-            <Item>
-              <h1>Leave a Comment</h1>
-              <TextField
-                id="filled-multiline-static"
-                label=""
-                multiline
-                rows={5}
-                defaultValue=""
-                placeholder="Comment"
-                variant="filled"
-                fullWidth
-              />
-            </Item>
-
-            <Item>
-              <Button variant="contained" color="success">
-                Submit
-              </Button>
-            </Item>
+          <Grid item xs={12} sx={{ width: 3 / 5 }}>
+            <AddCommentForm gameId={gameId} />
           </Grid>
 
-          <Grid item xs={12} sx={{ width: 3/5 }}>
-            {allComments.map((comment, i) => {
-              return (
-                <List
-                  sx={{
-                    width: "100%",
-                    maxWidth: 700,
-                    bgcolor: "background.paper",
-                  }}
-                  key={i}
-                >
-                  <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp" src="" />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={<FavoriteIcon />}
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: "inline" }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            {comment.username}
-                          </Typography>
-
-                          <Typography>"{comment.commentText}</Typography>
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                </List>
-              );
-            })}
+          <Grid item xs={12} sx={{ width: 3 / 5 }}>
+            <GameCommentList allComments={allComments} />
           </Grid>
         </Grid>
       </Box>

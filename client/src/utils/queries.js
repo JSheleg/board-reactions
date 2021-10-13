@@ -72,6 +72,22 @@ query Query($username: String!) {
 }
 `;
 
+export const QUERY_ME = gql`
+  {
+    me {
+      _id
+      username
+      email
+      friendCount
+      Comments {
+        _id
+        commentText
+        createdAt
+    }
+  }
+}
+`;
+
 export const QUERY_GAMES = gql`
 query games {
   games {

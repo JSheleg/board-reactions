@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import image from "../assets/uno.png";
 
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from "@apollo/react-hooks";
 import { Link } from "react-router-dom";
 import { QUERY_GAMES } from "../utils/queries";
 
@@ -35,7 +35,7 @@ const ExpandMore = styled((props) => {
 const AllGames = () => {
   const { loading, data } = useQuery(QUERY_GAMES);
   // const [ gameData, { error } ] = useMutation (ADD_GAME)
-const allGames = data?.games || {}
+  const allGames = data?.games || {};
 
   const [expandedId, setExpandedId] = React.useState(-1);
 
@@ -55,20 +55,20 @@ const allGames = data?.games || {}
             return (
               <Grid item xs={4} i={i} key={game._id}>
                 <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
-                <Link to={`/games/${game._id}`}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={image}
-                    alt="boardgame image"
-                  />
+                  <Link to={`/games/${game._id}`}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={image}
+                      alt="boardgame image"
+                    />
                   </Link>
 
                   <CardContent>
                     <Typography gutterBottom variant="h4" component="div">
                       {game.game_name}
                     </Typography>
-                    
+
                     <Typography gutterBottom variant="h5" component="div">
                       {game.category_id}
                     </Typography>
