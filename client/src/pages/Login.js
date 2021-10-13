@@ -72,14 +72,6 @@ const Login = () => {
           <Grid item xs={12}>
             <form onSubmit={handleFormSubmit}>
               <Item>
-                {/* <label htmlFor="email">Email:</label>
-              <input
-                name="email"
-                type="text"
-                id="email"
-                placeholder="email"
-                onChange={handleChange}
-              /> */}
                 <TextField
                   id="email"
                   label="Email"

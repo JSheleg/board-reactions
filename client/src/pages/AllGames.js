@@ -12,9 +12,8 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import image from "../assets/uno.png";
 
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from "@apollo/react-hooks";
 import { Link } from "react-router-dom";
 import { QUERY_GAMES } from "../utils/queries";
 
@@ -34,8 +33,7 @@ const ExpandMore = styled((props) => {
 
 const AllGames = () => {
   const { loading, data } = useQuery(QUERY_GAMES);
-  // const [ gameData, { error } ] = useMutation (ADD_GAME)
-const allGames = data?.games || {}
+  const allGames = data?.games || {};
 
   const [expandedId, setExpandedId] = React.useState(-1);
 
@@ -49,28 +47,32 @@ const allGames = data?.games || {}
 
   return (
     <div className="gameCardContainer">
-      <Box sx={{ flexGrow: 6 }}>
+      <h1 className="homepageTitle">GAME SELECTION!</h1>
+      <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {allGames.map((game, i) => {
             return (
               <Grid item xs={4} i={i} key={game._id}>
-                <Card sx={{ maxWidth: 600, maxHeight: 9999 }}>
-                <Link to={`/games/${game._id}`}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={image}
-                    alt="boardgame image"
-                  />
+                <Card sx={{ maxWidth: 1000, maxHeight: 9999 }}>
+                  <Link to={`/games/${game._id}`}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={require(`../assets/${game.game_name}.jpg`).default}
+                      alt={game.game_name}
+                      key={game.game_name}
+                    />
                   </Link>
 
                   <CardContent>
                     <Typography gutterBottom variant="h4" component="div">
                       {game.game_name}
                     </Typography>
+
                     <Typography gutterBottom variant="h5" component="div">
                       {game.category_id}
                     </Typography>
+
                     <Typography
                       gutterBottom
                       variant="h5"

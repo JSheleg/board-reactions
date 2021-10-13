@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { QUERY_GAMES } from "../utils/queries";
+import { useQuery } from "@apollo/react-hooks";
+
 // import Link from '@mui/material/Link';
 
 
@@ -56,22 +59,34 @@ const itemData = [
 ];
 
 const Home = () => {
+
+  const { loading, data } = useQuery(QUERY_GAMES);
+  const allGames = data?.games || {};
+
+console.log(allGames)
+
     return(
         <div>
+
+          <h1 className="homepageTitle">BOARD REACTIONS!</h1>
         <Box>
+        {loading ? (
+            <div>Loading...</div>
+          ) : (
         <Grid container spacing={0} direction="row" justifyContent="center" alignItems="center">
-        {itemData.map((item) => (
+        {allGames.map((game, i) => (
             
-          <Grid item xs={1} key={item.img}>
+          <Grid i xs={1} key={game.game_name}>
             <img
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
+              src={require(`../assets/${game.game_name}.jpg`).default}
+              alt={game.game_name}
               loading="lazy"
             />
           </Grid>
         ))}
      </Grid>
+          )}
+
      </Box>
      </div>
     )
