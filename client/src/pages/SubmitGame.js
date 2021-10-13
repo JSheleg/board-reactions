@@ -2,8 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 const setAge = [
   {
@@ -21,6 +22,42 @@ const setAge = [
   {
     value: "7",
     label: "7+",
+  },
+  {
+    value: "8",
+    label: "8+",
+  },
+  {
+    value: "9",
+    label: "9+",
+  },
+  {
+    value: "10",
+    label: "10+",
+  },
+  {
+    value: "11",
+    label: "11+",
+  },
+  {
+    value: "12",
+    label: "12+",
+  },
+  {
+    value: "13",
+    label: "13+",
+  },
+  {
+    value: "14",
+    label: "14+",
+  },
+  {
+    value: "15",
+    label: "15+",
+  },
+  {
+    value: "16",
+    label: "16+",
   },
 ];
 const setDuration = [
@@ -44,32 +81,60 @@ const setDuration = [
     value: "60",
     label: "60+ min",
   },
+  {
+    value: "70",
+    label: "70+ min",
+  },
+  {
+    value: "80",
+    label: "80+ min",
+  },
+  {
+    value: "90",
+    label: "90+ min",
+  },
+  {
+    value: "100",
+    label: "100+ min",
+  },
+  {
+    value: "110",
+    label: "110+ min",
+  },
+  {
+    value: "120",
+    label: "120+ min",
+  },
 ];
 const setCategory = [
-    {
-      value: "Party",
-      label: "Party",
-    },
-    {
-      value: "Strategy",
-      label: "Strategy",
-    },
-    {
-      value: "Cards",
-      label: "Cards",
-    },
-    {
-      value: "Gambling",
-      label: "Gambling",
-    },
-  ];
+  {
+    value: "Party",
+    label: "Party",
+  },
+  {
+    value: "Strategy",
+    label: "Strategy",
+  },
+  {
+    value: "Cards",
+    label: "Cards",
+  },
+  {
+    value: "Gambling",
+    label: "Gambling",
+  },
+  {
+    value: "Storytelling",
+    label: "Storytelling",
+  },
+];
 
 const SubmitGame = () => {
-//   const [value, setValue] = React.useState("Controlled");
+  //   const [value, setValue] = React.useState("Controlled");
 
-//   const handleChange = (event) => {
-//     setValue(event.target.value);
-//   };
+  //   const handleChange = (event) => {
+  //     setValue(event.target.value);
+  //   };
 
   const [age, setage] = React.useState("");
 
@@ -90,8 +155,8 @@ const SubmitGame = () => {
   };
 
   return (
-    <div className="addGame">
-      <h1>ADD A GAME</h1>
+    <div>
+      <h1 className="homepageTitle">ADD A GAME</h1>
       <Box
         component="form"
         sx={{
@@ -100,7 +165,15 @@ const SubmitGame = () => {
         noValidate
         autoComplete="off"
       >
-        <div>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+                   <Grid item xs={12}>
+
           <TextField
             id="filled-textarea"
             label=""
@@ -108,6 +181,9 @@ const SubmitGame = () => {
             multiline
             variant="filled"
           />
+          </Grid>
+          <Grid item xs={12}>
+
           <TextField
             id=""
             select
@@ -123,8 +199,10 @@ const SubmitGame = () => {
               </MenuItem>
             ))}
           </TextField>
-        </div>
-        <div>
+
+          </Grid>
+          <Grid item xs={12}>
+
           <TextField
             id="filled-multiline-static"
             label=""
@@ -134,6 +212,10 @@ const SubmitGame = () => {
             placeholder="Description"
             variant="filled"
           />
+
+</Grid>
+          <Grid item xs={12}>
+
           <TextField
             id="filled-multiline-static"
             label=""
@@ -143,8 +225,10 @@ const SubmitGame = () => {
             placeholder="Instructions"
             variant="filled"
           />
-        </div>
-        <div>
+
+</Grid>
+          <Grid item xs={12}>
+
           <TextField
             id="filled-select-age"
             select
@@ -160,6 +244,10 @@ const SubmitGame = () => {
               </MenuItem>
             ))}
           </TextField>
+
+          </Grid>
+          <Grid item xs={12}>
+
           <TextField
             id=""
             select
@@ -175,14 +263,19 @@ const SubmitGame = () => {
               </MenuItem>
             ))}
           </TextField>
-        </div>
-        <Stack direction="row" spacing={2} pl='18.5rem'>
 
-      <Button variant="contained" color="success">
-        Submit Game
-      </Button>
+          </Grid>
+          <Grid item xs={12}>
 
-    </Stack>
+          <Stack direction="row" spacing={2}>
+            <Button variant="contained" color="success">
+              Submit Game
+            </Button>
+          </Stack>
+
+          </Grid>
+
+        </Grid>
       </Box>
     </div>
   );
