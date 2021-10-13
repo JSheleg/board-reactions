@@ -1,7 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Game, Comment, User, Favorite }  = require('../models');
+const { Game, Comment, User, Favorite } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
+const cloudinary = require("cloudinary");
 
 const resolvers = {
     Query: {
@@ -14,109 +15,109 @@ const resolvers = {
                     model: 'User'
                 },
                 {
-                  path: 'games',
-                  model: 'Game',
-                  populate: {
-                    path: 'comments',
-                    model: 'Comment',
-                  }
+                    path: 'games',
+                    model: 'Game',
+                    populate: {
+                        path: 'comments',
+                        model: 'Comment',
+                    }
                 }
-              ])
+            ])
         },
-    
+
 
         //get one user
         user: async (parent, { username }) => {
-        return User.findOne({ username })
-        .select('-__v -password')
-        .populate([
-            {
-                path:'games',
-                model:'Game',
-                populate:{
-                    path: 'comments',
-                    model: 'Comment'
-                }
-            }
+            return User.findOne({ username })
+                .select('-__v -password')
+                .populate([
+                    {
+                        path: 'games',
+                        model: 'Game',
+                        populate: {
+                            path: 'comments',
+                            model: 'Comment'
+                        }
+                    }
 
-        ])
-        .populate('friends');
-        
-        }, 
+                ])
+                .populate('friends');
+
+        },
         //get all games
         games: async () => {
             return await Game.find()
         },
         //get all games by category
-        games: async (parent, {category}) => {
-            const params = category? {category} : {};
-            return Game.find(params).populate('comments').sort({game_name: -1});
+        games: async (parent, { category }) => {
+            const params = category ? { category } : {};
+            return Game.find(params).populate('comments').sort({ game_name: -1 });
         },
         //game by id
-        gamebyId: async(parents,{gameId}) => {
-            const params = gameId? {gameId}:{};
+        gamebyId: async (parents, { gameId }) => {
+            const params = gameId ? { gameId } : {};
             return Game.findById(gameId).populate('comments').populate('favorites');
         },
         //current user login
         me: async (parent, args, context) => {
             if (context.user) {
-              const userData = await User.findOne({ _id: context.user._id })
-                .select('-__v -password')
-                .populate('comments')
-                .populate('friends');
-      
-              return userData;
+                const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password')
+                    .populate('comments')
+                    .populate('friends');
+
+                return userData;
             }
-      
+
             throw new AuthenticationError('Not logged in');
-          },
-            
+        },
+
     },
     Mutation: {
         //login
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-          
+
             if (!user) {
-              throw new AuthenticationError('Incorrect credentials');
+                throw new AuthenticationError('Incorrect credentials');
             }
-          
+
             const correctPw = await user.isCorrectPassword(password);
-          
+
             if (!correctPw) {
-              throw new AuthenticationError('Incorrect credentials');
+                throw new AuthenticationError('Incorrect credentials');
             }
-          
+
             const token = signToken(user);
-            return {token, user};
+            return { token, user };
         },
         //add user
-        addUser: async(parent, args) => {
+        addUser: async (parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
-      
-            return {token, user};
-      
-          },
+
+            return { token, user };
+
+        },
         //add a friend to a user
-        addFriend: async (parent, {friendId}, context) => {
-            if(context.user){
+        addFriend: async (parent, { friendId }, context) => {
+            if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id},
-                    { $addToSet: {friends: friendId}},
-                    {new: true}
+                    { _id: context.user._id },
+                    { $addToSet: { friends: friendId } },
+                    { new: true }
                 ).populate('friends');
                 return updatedUser;
             }
 
             throw new AuthenticationError('You need to be logged in');
         },
-        deleteFriend: async(parents,{friendId}, context) =>{
-            if(context.user){
+        deleteFriend: async (parents, { friendId }, context) => {
+            if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    {_id: context.user._id},
-                    {$pull: {friends:friendId}},
-                    {new:true}
+                    { _id: context.user._id },
+                    { $pull: { friends: friendId } },
+                    { new: true }
                 ).populate('friends');
                 return updatedUser;
             }
@@ -128,12 +129,12 @@ const resolvers = {
             return game;
         },
         //add a game  to user
-        addGameToUser: async ( parent, {gameId}, context) => {
-            if(context.user){
+        addGameToUser: async (parent, { gameId }, context) => {
+            if (context.user) {
                 let userData = await User.findByIdAndUpdate(
-                    { _id: context.user._id},
-                    { $addToSet: {games: gameId}},
-                    {new: true}
+                    { _id: context.user._id },
+                    { $addToSet: { games: gameId } },
+                    { new: true }
                 ).populate('games')
 
                 return userData;
@@ -142,48 +143,86 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in');
         },
         //favorite a game
-        favoriteGame: async(parents, {gameId}, context) => {
-            if(context.user){
+        favoriteGame: async (parents, { gameId }, context) => {
+            if (context.user) {
                 console.log(context.user.username)
                 const updatedGame = await Game.findByIdAndUpdate(
-                    {_id: gameId},
-                    {$addToSet: {favorites:{username: context.user.username}}},
-                    {new: true}
+                    { _id: gameId },
+                    { $addToSet: { favorites: { username: context.user.username } } },
+                    { new: true }
                 ).populate('favorites')
-                    
+
                 return updatedGame;
             }
         },
         //add a comment to a game 
-        addComment: async (parent,{gameId, commentText},context) => {
+        addComment: async (parent, { gameId, commentText }, context) => {
             console.log(context.user);
-            if(context.user){
+            if (context.user) {
                 console.log(commentText);
-                const comment = await Comment.create({commentText,username:context.user.username});
+                const comment = await Comment.create({ commentText, username: context.user.username });
 
                 const gameData = await Game.findByIdAndUpdate(
-                    {_id: gameId},
-                    { $push: { comments: comment._id}},
-                    { new: true}
+                    { _id: gameId },
+                    { $push: { comments: comment._id } },
+                    { new: true }
                 ).populate('comments');
 
                 return gameData;
             }
             throw new AuthenticationError('You need to be logged in');
         },
-        updatePassword: async (parent, {username, password}, context) => {
+        updatePassword: async (parent, { username, password }, context) => {
 
             const saltRounds = 10;
             password = await bcrypt.hash(password, saltRounds);
 
             const updatedUser = await User.findOneAndUpdate(
-                {username: username},
-                {password: password},
-                {new: true}
+                { username: username },
+                { password: password },
+                { new: true }
             )
             return updatedUser
+        },
+        addProfilePicture: async (parent, { image }, context) => {
+
+            if (context.user) {
+                //initialize cloudinary
+                cloudinary.config({
+                    cloud_name: process.env.CLOUDINARY_NAME,
+                    api_key: process.env.CLOUDINARY_API_KEY,
+                    api_secret: process.env.CLOUDINARY_API_SECRET,
+                });
+                // try-catch block for handling actual image upload
+                try {
+                    const result = await cloudinary.v2.uploader.upload(image, {
+                        //here i chose to allow only jpg and png upload  
+                        allowed_formats: ['jpg', 'png', 'svg', 'jpeg'],
+                        //generates a new id for each uploaded image
+                        public_id: '',
+                        // creates a folder called "your_folder_name" where images will be stored.
+                        folder: 'profile_pictures',
+                    });
+
+                    const updatedUser = await User.findByIdAndUpdate(
+                        { _id: context.user._id },
+                        { image: result.url },
+                        { new: true }
+                    )
+                    console.log('updatedUser', updatedUser)
+                    // returns uploaded photo url if successful `result.url`.
+                    // if we were going to store image name in database,this
+                    const message = `Successful-Photo URL: ${result.url}`;
+                    console.log('message', message)
+
+                    return {updatedUser, message }
+                } catch (e) {
+
+                    return `Image could not be uploaded:${e.message}`;
+                }
+            }
         }
-    }  
+    }
 };
 
 module.exports = resolvers;
