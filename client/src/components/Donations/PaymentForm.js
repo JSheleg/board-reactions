@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
 import React, { useState} from 'react'
 
+//use 4242424242424242 as CC, can use any future date, CCV and valid US zipcode
 const CARD_OPTIONS = {
     iconStyle: "solid",
     style: {
@@ -63,7 +64,7 @@ export default function PaymentForm() {
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             </fieldset>
-            <button className="donate-button">Donate</button>
+            <button>Donate</button>
         </form>
         :
         <div>
