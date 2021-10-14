@@ -355,7 +355,7 @@ console.log('min time', typeof avg_min_game_time)
 console.log('max time', typeof avg_max_game_time )
 console.log(game_description)
     try {
-      await addGame({
+      const mutationResponse = await addGame({
         variables: {
           game_name: game_name,
           category: category,
@@ -367,10 +367,11 @@ console.log(game_description)
           image: 'default'
         },
       });
-      // clear form value
-      // setText("");
-      setGameName("")
-      // setCharacterCount(0);
+      
+      const newGameId = mutationResponse.data.addGame._id;
+
+      window.location.replace(`./games/${newGameId}`);
+
     } catch (e) {
       console.error(e);
     }
