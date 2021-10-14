@@ -23,7 +23,7 @@ import AddCommentForm from "../components/AddCommentForm";
 
 const SingleGame = (props) => {
 
-  const [heartClicked, setHeartClicked] = useState(false)
+  const [message, setMessage] = useState(null);
 
   const [favoriteGame] = useMutation(ADD_FAVORITE);
   const [addGameToUser] = useMutation(ADD_GAME_TO_USER);
@@ -42,11 +42,11 @@ const SingleGame = (props) => {
 
   const handleHeartClick = async () => {
 
-    setHeartClicked(!heartClicked)
+
 
     try {
       await favoriteGame({
-        variables: {gameId: gameId}
+        variables: { gameId: gameId }
       })
     } catch (e) {
       console.log(e)
@@ -54,11 +54,17 @@ const SingleGame = (props) => {
 
     try {
       await addGameToUser({
-        variables: {gameId: gameId}
+        variables: { gameId: gameId }
       })
     } catch (e) {
       console.log(e);
     }
+    
+    setMessage('Game Favorited!')
+
+    setTimeout(() => {
+      setMessage(null)
+    }, 2000)
   }
 
   return (
@@ -104,6 +110,10 @@ const SingleGame = (props) => {
                   </Typography>
                   <IconButton onClick={handleHeartClick} aria-label="add to favorites">
                     <FavoriteIcon />
+                    {message &&
+                      <div>
+                        <p>{message}</p>
+                      </div>}
                   </IconButton>
                 </CardContent>
               </Card>
