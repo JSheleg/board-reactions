@@ -1,5 +1,5 @@
 //import the gql tagged template function
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 //create our typeDefs
 const typeDefs = gql`
@@ -35,6 +35,7 @@ const typeDefs = gql`
         avg_min_game_time: Int
         avg_max_game_time: Int
         game_description: String
+        image: String
         favoritesCount: Int
         favorites:[Favorite]
         comments:[Comment]
@@ -65,7 +66,15 @@ const typeDefs = gql`
             answerTwo: String!
             ): Auth
         addComment(commentText: String!, gameId:String!): Game
-        addGame(game_name: String!, category: String!, min_number_of_players: Int, max_number_of_players: Int, avg_min_game_time: Int, avg_max_game_time: Int, game_description: String!): Game
+        addGame(
+            game_name: String!, 
+            category: String!, 
+            min_number_of_players: Int, 
+            max_number_of_players: Int, 
+            avg_min_game_time: Int, 
+            avg_max_game_time: Int, 
+            game_description: String!, 
+            image: String): Game
         addGameToUser(gameId:String!): User
         favoriteGame(gameId:String!):Game
         addFriend(friendId: ID!): User

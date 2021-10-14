@@ -88,3 +88,90 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const ADD_FAVORITE = gql`
+mutation FavoriteGameMutation($gameId: String!) {
+  favoriteGame(gameId: $gameId) {
+    _id
+    game_name
+    category
+    comments {
+      commentText
+      username
+    }
+    favorites {
+      username
+      _id
+    }
+  }
+}
+`;
+
+export const ADD_GAME_TO_USER = gql`
+mutation AddGameToUserMutation($gameId: String!) {
+  addGameToUser(gameId: $gameId) {
+    username
+  }
+}
+`;
+
+// export const ADD_GAME = gql`
+//   mutation addGame(
+//     $game_name: String!,
+//     $category: String!,
+//     $min_number_of_players: Int,
+//     $max_number_of_players: Int,
+//     $avg_min_game_time: Int,
+//     $avg_max_game_time: Int,
+//     $game_description: String!
+//     )
+//     {
+//     addGame(
+//     game_name: $game_name,
+//     category: $category,
+//     min_number_of_players: $min_number_of_players,
+//     max_number_of_players: $max_number_of_players,
+//     avg_min_game_time: $avg_min_game_time,
+//     avg_max_game_time: $avg_max_game_time,
+//     game_description: $game_description
+//     ) {
+//       game_name
+//       category
+//       min_number_of_players
+//       max_number_of_players
+//       avg_min_game_time
+//       avg_max_game_time
+//       game_description
+//       }
+//     }
+//   }
+// `;
+
+export const ADD_GAME = gql`
+  mutation addGame(
+    $game_name: String!
+    $category: String!
+    $game_description: String!
+    $min_number_of_players: Int
+    $max_number_of_players: Int
+    $avg_min_game_time: Int
+    $avg_max_game_time: Int
+    $image: String
+  ) {
+    addGame(
+      game_name: $game_name
+      category: $category
+      game_description: $game_description
+      min_number_of_players: $min_number_of_players
+      max_number_of_players: $max_number_of_players
+      avg_min_game_time: $avg_min_game_time
+      avg_max_game_time: $avg_max_game_time
+      image: $image
+    ) {
+      _id
+      game_name
+      game_description
+      image
+    }
+  }
+`;

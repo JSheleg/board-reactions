@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -41,7 +44,7 @@ return (
                   variant="body2"
                   color="text.primary"
                 >
-                  {comment.username}
+                  <Link to={`/profile/${comment.username}`}> {comment.username}</Link>
                 </Typography>
 
                 <Typography>"{comment.commentText}</Typography>
