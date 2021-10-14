@@ -1,97 +1,386 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 
-const setAge = [
+import { useMutation } from "@apollo/react-hooks";
+import { ADD_GAME } from "../utils/mutations"
+
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+
+const setAgeMin = [
+  {
+    value: "1",
+    label: "1",
+  },
+  {
+    value: "2",
+    label: "2",
+  },
+  {
+    value: "3",
+    label: "3",
+  },
   {
     value: "4",
-    label: "4+",
+    label: "4",
   },
   {
     value: "5",
-    label: "5+",
+    label: "5",
   },
   {
     value: "6",
-    label: "6+",
+    label: "6",
   },
   {
     value: "7",
-    label: "7+",
+    label: "7",
+  },
+  {
+    value: "8",
+    label: "8",
+  },
+  {
+    value: "9",
+    label: "9",
+  },
+  {
+    value: "10",
+    label: "10",
+  },
+  {
+    value: "11",
+    label: "11",
+  },
+  {
+    value: "12",
+    label: "12",
+  },
+  {
+    value: "13",
+    label: "13",
+  },
+  {
+    value: "14",
+    label: "14",
+  },
+  {
+    value: "15",
+    label: "15",
+  },
+  {
+    value: "16",
+    label: "16",
+  },
+  {
+    value: "17",
+    label: "17",
+  },
+  {
+    value: "18",
+    label: "18",
   },
 ];
-const setDuration = [
+
+const setAgeMax = [
+  {
+    value: "1",
+    label: "1",
+  },
+  {
+    value: "2",
+    label: "2",
+  },
+  {
+    value: "3",
+    label: "3",
+  },
+  {
+    value: "4",
+    label: "4",
+  },
+  {
+    value: "5",
+    label: "5",
+  },
+  {
+    value: "6",
+    label: "6",
+  },
+  {
+    value: "7",
+    label: "7",
+  },
+  {
+    value: "8",
+    label: "8",
+  },
+  {
+    value: "9",
+    label: "9",
+  },
+  {
+    value: "10",
+    label: "10",
+  },
+  {
+    value: "11",
+    label: "11",
+  },
+  {
+    value: "12",
+    label: "12",
+  },
+  {
+    value: "13",
+    label: "13",
+  },
+  {
+    value: "14",
+    label: "14",
+  },
+  {
+    value: "15",
+    label: "15",
+  },
+  {
+    value: "16",
+    label: "16",
+  },
+  {
+    value: "17",
+    label: "17",
+  },
+  {
+    value: "18",
+    label: "18",
+  },
+];
+
+const setdurationMin = [
+  {
+    value: "10",
+    label: "10 min",
+  },
   {
     value: "20",
-    label: "20+ min",
+    label: "20 min",
   },
   {
     value: "30",
-    label: "30+ min",
+    label: "30 min",
   },
   {
     value: "30",
-    label: "40+ min",
+    label: "40 min",
   },
   {
     value: "50",
-    label: "50+ min",
+    label: "50 min",
   },
   {
     value: "60",
-    label: "60+ min",
+    label: "60 min",
+  },
+  {
+    value: "70",
+    label: "70 min",
+  },
+  {
+    value: "80",
+    label: "80 min",
+  },
+  {
+    value: "90",
+    label: "90 min",
+  },
+  {
+    value: "100",
+    label: "100 min",
+  },
+  {
+    value: "110",
+    label: "110 min",
+  },
+  {
+    value: "120",
+    label: "120 min",
   },
 ];
+
+const setdurationMax = [
+  {
+    value: "10",
+    label: "10 min",
+  },
+  {
+    value: "20",
+    label: "20 min",
+  },
+  {
+    value: "30",
+    label: "30 min",
+  },
+  {
+    value: "30",
+    label: "40 min",
+  },
+  {
+    value: "50",
+    label: "50 min",
+  },
+  {
+    value: "60",
+    label: "60 min",
+  },
+  {
+    value: "70",
+    label: "70 min",
+  },
+  {
+    value: "80",
+    label: "80 min",
+  },
+  {
+    value: "90",
+    label: "90 min",
+  },
+  {
+    value: "100",
+    label: "100 min",
+  },
+  {
+    value: "110",
+    label: "110 min",
+  },
+  {
+    value: "120",
+    label: "120 min",
+  },
+];
+
 const setCategory = [
-    {
-      value: "Party",
-      label: "Party",
-    },
-    {
-      value: "Strategy",
-      label: "Strategy",
-    },
-    {
-      value: "Cards",
-      label: "Cards",
-    },
-    {
-      value: "Gambling",
-      label: "Gambling",
-    },
-  ];
+  {
+    value: "Party",
+    label: "Party",
+  },
+  {
+    value: "Strategy",
+    label: "Strategy",
+  },
+  {
+    value: "Cards",
+    label: "Cards",
+  },
+  {
+    value: "Gambling",
+    label: "Gambling",
+  },
+  {
+    value: "Storytelling",
+    label: "Storytelling",
+  },
+];
 
 const SubmitGame = () => {
-//   const [value, setValue] = React.useState("Controlled");
 
-//   const handleChange = (event) => {
-//     setValue(event.target.value);
-//   };
+  // const [characterCount, setCharacterCount] = useState(0);
 
-  const [age, setage] = React.useState("");
+  const [addGame] = useMutation(ADD_GAME);
 
-  const handleAgeChange = (event) => {
-    setage(event.target.value);
+  const [game_name, setGameName] = useState();
+
+  const handleGameNameChange = (event) => {
+    setGameName(event.target.value);
   };
 
-  const [duration, setduration] = React.useState("");
+  const [game_description, setGameDescription] = useState();
 
-  const handleDurationChange = (event) => {
-    setduration(event.target.value);
+  const handleGameDescriptionChange = (event) => {
+    setGameDescription(event.target.value);
   };
 
-  const [category, setcategory] = React.useState("");
+  const [min_number_of_players, setPlayersMin] = useState();
+
+  const handlePlayersMinChange = (event) => {
+    setPlayersMin(event.target.value);
+  };
+
+  const [max_number_of_players, setPlayersMax] = useState();
+
+  const handlePlayersMaxChange = (event) => {
+    setPlayersMax(event.target.value);
+  };
+
+  const [avg_min_game_time, setdurationmin] = useState();
+
+  const handleDurationMinChange = (event) => {
+    setdurationmin(event.target.value);
+  };
+
+  const [avg_max_game_time, setdurationmax] = useState();
+
+  const handleDurationMaxChange = (event) => {
+    setdurationmax(event.target.value);
+  };
+
+  const [category, setcategory] = useState();
 
   const handleCategoryChange = (event) => {
     setcategory(event.target.value);
   };
 
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log('submit')
+console.log(game_name)
+console.log(category)
+console.log('min players', typeof min_number_of_players )
+console.log('max plaerys', typeof max_number_of_players)
+console.log('min time', typeof avg_min_game_time)
+console.log('max time', typeof avg_max_game_time )
+console.log(game_description)
+    try {
+      await addGame({
+        variables: {
+          game_name: game_name,
+          category: category,
+          min_number_of_players: parseInt(min_number_of_players),
+          max_number_of_players: parseInt(max_number_of_players),
+          avg_min_game_time: parseInt(avg_min_game_time),
+          avg_max_game_time: parseInt(avg_max_game_time),
+          game_description: game_description, 
+          image: 'default'
+        },
+      });
+      // clear form value
+      // setText("");
+      setGameName("")
+      // setCharacterCount(0);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
-    <div className="addGame">
-      <h1>ADD A GAME</h1>
+    <div>
+      
+      <h1 className="homepageTitle">ADD A GAME</h1>
+<form onSubmit={handleFormSubmit}>
       <Box
         component="form"
         sx={{
@@ -100,16 +389,29 @@ const SubmitGame = () => {
         noValidate
         autoComplete="off"
       >
-        <div>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+                   <Grid item xs={12}>
+
           <TextField
-            id="filled-textarea"
+            id="game-name"
             label=""
             placeholder="Title"
             multiline
             variant="filled"
+            value={game_name}
+            onChange={handleGameNameChange}
           />
+          </Grid>
+          <Grid item xs={12}>
+
           <TextField
-            id=""
+            id="game-category"
             select
             label="Category"
             value={category}
@@ -123,8 +425,10 @@ const SubmitGame = () => {
               </MenuItem>
             ))}
           </TextField>
-        </div>
-        <div>
+
+          </Grid>
+          <Grid item xs={12}>
+
           <TextField
             id="filled-multiline-static"
             label=""
@@ -133,7 +437,13 @@ const SubmitGame = () => {
             defaultValue=""
             placeholder="Description"
             variant="filled"
+            value={game_description}
+            onChange={handleGameDescriptionChange}
           />
+
+</Grid>
+          {/* <Grid item xs={12}>
+
           <TextField
             id="filled-multiline-static"
             label=""
@@ -143,47 +453,96 @@ const SubmitGame = () => {
             placeholder="Instructions"
             variant="filled"
           />
-        </div>
-        <div>
+
+</Grid> */}
+          <Grid item xs={12} >
           <TextField
-            id="filled-select-age"
+            id="filled-select-players-min"
             select
-            label="Age"
-            value={age}
-            onChange={handleAgeChange}
-            helperText="Please select your age"
+            label="Players"
+            value={min_number_of_players}
+            onChange={handlePlayersMinChange}
+            helperText="Min players"
             variant="filled"
+            sx={{ maxWidth: 150}}
           >
-            {setAge.map((option) => (
+            {setAgeMin.map((option) => (
+              <MenuItem key={option} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            id="filled-select-player-max"
+            select
+            label="Players"
+            value={max_number_of_players}
+            onChange={handlePlayersMaxChange}
+            helperText="Max players"
+            variant="filled"
+            sx={{ maxWidth: 150}}
+          >
+            {setAgeMax.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
+
+          </Grid>
+
+          <Grid item xs={12}>
+
           <TextField
-            id=""
+            id="min-duration"
             select
             label="Duration"
-            value={duration}
-            onChange={handleDurationChange}
-            helperText="Please select your duration"
+            value={avg_min_game_time}
+            onChange={handleDurationMinChange}
+            helperText="Min Duration"
             variant="filled"
+            sx={{ maxWidth: 150}}
           >
-            {setDuration.map((option) => (
+            {setdurationMin.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
-        </div>
-        <Stack direction="row" spacing={2} pl='18.5rem'>
 
-      <Button variant="contained" color="success">
-        Submit Game
-      </Button>
+          <TextField
+            id="max-duration"
+            select
+            label="Duration"
+            value={avg_max_game_time}
+            onChange={handleDurationMaxChange}
+            helperText="Max Duration"
+            variant="filled"
+            sx={{ maxWidth: 150}}
+          >
+            {setdurationMax.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
 
-    </Stack>
+          </Grid>
+          <Grid item xs={12}>
+
+          <Stack direction="row" spacing={2}>
+            <Button variant="contained" color="success" type="submit" onClick={handleFormSubmit}>
+              Submit Game
+            </Button>
+          </Stack>
+
+          </Grid>
+
+        </Grid>
+
       </Box>
+      </form>
     </div>
   );
 };

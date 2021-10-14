@@ -63,8 +63,6 @@ const Home = () => {
   const { loading, data } = useQuery(QUERY_GAMES);
   const allGames = data?.games || {};
 
-console.log(allGames)
-
     return(
         <div>
 
@@ -76,11 +74,13 @@ console.log(allGames)
         <Grid container spacing={0} direction="row" justifyContent="center" alignItems="center">
         {allGames.map((game, i) => (
             
-          <Grid i xs={1} key={game.game_name}>
+          <Grid i xs={1} key={game.game_name} >
             <img
               src={require(`../assets/${game.image}.jpg`).default}
               alt={game.game_name}
               loading="lazy"
+              width="100%"
+              height="100%"
             />
           </Grid>
         ))}
