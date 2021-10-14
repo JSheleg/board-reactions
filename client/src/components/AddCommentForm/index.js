@@ -78,6 +78,7 @@ const AddCommentForm = ({ gameId, allComments }) => {
       console.log(e);
     }
 
+    window.location.reload();
   };
 
   return (
