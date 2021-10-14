@@ -3,6 +3,24 @@ import { useMutation } from '@apollo/client';
 
 import { REMOVE_FRIEND } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: 'white'
+};
 
 const FriendList = ({ friendCount, username, friends }) => {
 
@@ -32,22 +50,39 @@ const FriendList = ({ friendCount, username, friends }) => {
   
     return (
       <div>
+                  <Box sx={{ flexGrow: 1, m: 2 }}>
+              <Grid
+                container
+                spacing={1}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+      <Grid item xs={12}>
         <h5>
-          {username}'s {friendCount} {friendCount === 1 ? 'friend' : 'friends'}
+         <span className="username-style">{username}'s</span> {friendCount} {friendCount === 1 ? 'friend' : 'friends'}
         </h5>
+        </Grid>
         {friends.map(friend => (
+          <Grid item xs={12}>
+            
           <div key={friend._id}>
-          <button>
-            <Link to={`/profile/${friend.username}`}>{friend.username}</Link>
-          </button>
+          <Item sx={{ width: 700 }}>
+          <Button variant="contained" color="success" sx={{ m: 1, mr:20, width: 300 }}>
+            <Link style={linkStyle} to={`/profile/${friend.username}`}>{friend.username}</Link>
+          </Button>
           {/* check to see if username equals the logged in user - if does, include remove friend btn */}
           {username === loggedInUser ? 
-          <button onClick={() => {removeFriend(friend._id)}}>
+          <Button variant="contained" color="error" onClick={() => {removeFriend(friend._id)}}>
           - Remove Friend
-          </button> 
+          </Button> 
           : null}
+          </Item>
           </div>
+          </Grid>
         ))}
+        </Grid>
+        </Box>
       </div>
     );
   };
