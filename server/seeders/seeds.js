@@ -591,24 +591,37 @@ db.once('open', async() => {
 
   
   
-  // create game comments
-  // let createdComments = [];
-  // for (let i = 0; i < 100; i += 1) {
-  //   const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+  //create game comments
+  let createdComments = [];
 
-  //   const randomGameIndex = Math.floor(Math.random() * games.length);
-  //   const { username, _id: gameId } = games[randomGameIndex];
+  for (let i = 0; i < 100; i += 1) {
 
-  //   createdComments = await Comment.create({ commentText, username });
+    const randomUserIndex = Math.floor(Math.random() * userData.length);
+    // console.log(randomUserIndex + " random user index")
+    let { username: username, _id: userId } = userData[randomUserIndex];
 
-  //   const updatedUser = await User.updateOne(
-  //     { _id: gameId },
-  //     { $push: { comments: createdComments._id } }
-  //   );
+    userId = userId.toString();
 
-  // }
+    const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
-  // console.log('comments seeded')
+    const randomGameIndex = Math.floor(Math.random() * games.length);
+    const { _id: gameId } = games[randomGameIndex];
+
+    createdComments = await Comment.create({ commentText, username });
+
+    const gameData = await Game.findByIdAndUpdate(
+      { _id: gameId },
+      { $push: { comments: createdComments._id } }
+    );
+
+    const updatedUser = await User.findByIdAndUpdate(
+      {_id: userId},
+      {$addToSet: {games: gameId}}
+    )
+
+  }
+
+  console.log('comments seeded')
     
     
   process.exit();
