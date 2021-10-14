@@ -12,7 +12,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-import { QUERY_GAME, QUERY_GAMES, QUERY_ME } from "../utils/queries";
+import { QUERY_GAME } from "../utils/queries";
 
 import GameCommentList from "../components/GameCommentList";
 import Auth from "../utils/auth";
