@@ -88,3 +88,30 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const ADD_FAVORITE = gql`
+mutation FavoriteGameMutation($gameId: String!) {
+  favoriteGame(gameId: $gameId) {
+    _id
+    game_name
+    category
+    comments {
+      commentText
+      username
+    }
+    favorites {
+      username
+      _id
+    }
+  }
+}
+`;
+
+export const ADD_GAME_TO_USER = gql`
+mutation AddGameToUserMutation($gameId: String!) {
+  addGameToUser(gameId: $gameId) {
+    username
+  }
+}
+`;
+

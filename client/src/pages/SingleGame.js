@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_GAME, QUERY_GAMES, QUERY_ME } from "../utils/queries";
+import { ADD_FAVORITE, ADD_GAME_TO_USER } from "../utils/mutations";
 
 import GameCommentList from "../components/GameCommentList";
 import Auth from "../utils/auth";
@@ -21,6 +22,11 @@ import AddCommentForm from "../components/AddCommentForm";
 
 
 const SingleGame = (props) => {
+
+  const [heartClicked, setHeartClicked] = useState(false)
+
+  const [favoriteGame] = useMutation(ADD_FAVORITE);
+  const [addGameToUser] = useMutation(ADD_GAME_TO_USER);
   // get username of logged in user
   const loggedInUser = Auth.getLoggedInUsername();
 
@@ -34,6 +40,19 @@ const SingleGame = (props) => {
 
   const allComments = singleGame.comments;
 
+  const handleHeartClick = async () => {
+
+    setHeartClicked(!heartClicked)
+
+    try {
+      await favoriteGame({
+        variables: {gameId: gameId}
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <div>
       <Box sx={{ flexGrow: 1, m: 2 }}>
@@ -46,41 +65,41 @@ const SingleGame = (props) => {
         >
           <Grid item xs={12}>
 
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <Card sx={{ maxWidth: 1000, maxHeight: 9999 }}>
-              <CardMedia
-                component="img"
-                height="500"
-                image={ require(`../assets/${singleGame.image}.jpg`).default }
-                alt="boardgame image"
-              />
+            {loading ? (
+              <div>Loading...</div>
+            ) : (
+              <Card sx={{ maxWidth: 1000, maxHeight: 9999 }}>
+                <CardMedia
+                  component="img"
+                  height="500"
+                  image={require(`../assets/${singleGame.image}.jpg`).default}
+                  alt="boardgame image"
+                />
 
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div">
-                  {singleGame.game_name}
-                </Typography>
-                <Typography gutterBottom variant="h5" component="div">
-                  {singleGame.category}
-                </Typography>
-                <Typography gutterBottom variant="h7" component="div">
-                  Players: {singleGame.min_number_of_players} to{" "}
-                  {singleGame.max_number_of_players}
-                </Typography>
-                <Typography gutterBottom variant="h7" component="div">
-                  Duration: {singleGame.avg_min_game_time} to{" "}
-                  {singleGame.avg_max_game_time} min
-                </Typography>
-                <Typography gutterBottom variant="h7" component="div">
-                  {singleGame.game_description}
-                </Typography>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
-              </CardContent>
-            </Card>
-          )}
+                <CardContent>
+                  <Typography gutterBottom variant="h4" component="div">
+                    {singleGame.game_name}
+                  </Typography>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {singleGame.category}
+                  </Typography>
+                  <Typography gutterBottom variant="h7" component="div">
+                    Players: {singleGame.min_number_of_players} to{" "}
+                    {singleGame.max_number_of_players}
+                  </Typography>
+                  <Typography gutterBottom variant="h7" component="div">
+                    Duration: {singleGame.avg_min_game_time} to{" "}
+                    {singleGame.avg_max_game_time} min
+                  </Typography>
+                  <Typography gutterBottom variant="h7" component="div">
+                    {singleGame.game_description}
+                  </Typography>
+                  <IconButton onClick={handleHeartClick} aria-label="add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                </CardContent>
+              </Card>
+            )}
           </Grid>
 
           <Grid item xs={12} sx={{ width: 3 / 5 }}>
@@ -88,11 +107,11 @@ const SingleGame = (props) => {
           </Grid>
 
           <Grid item xs={12} sx={{ width: 3 / 5 }}>
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <GameCommentList allComments={allComments} />
-          )}
+            {loading ? (
+              <div>Loading...</div>
+            ) : (
+              <GameCommentList allComments={allComments} />
+            )}
           </Grid>
         </Grid>
       </Box>
