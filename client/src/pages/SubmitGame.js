@@ -297,47 +297,47 @@ const setCategory = [
 
 const SubmitGame = () => {
 
-  const [characterCount, setCharacterCount] = useState(0);
+  // const [characterCount, setCharacterCount] = useState(0);
 
   const [addGame] = useMutation(ADD_GAME);
 
-  const [game_name, setGameName] = React.useState("");
+  const [game_name, setGameName] = useState();
 
   const handleGameNameChange = (event) => {
     setGameName(event.target.value);
   };
 
-  const [game_description, setGameDescription] = React.useState("");
+  const [game_description, setGameDescription] = useState();
 
   const handleGameDescriptionChange = (event) => {
     setGameDescription(event.target.value);
   };
 
-  const [min_number_of_players, setPlayersMin] = React.useState("");
+  const [min_number_of_players, setPlayersMin] = useState();
 
   const handlePlayersMinChange = (event) => {
     setPlayersMin(event.target.value);
   };
 
-  const [max_number_of_players, setPlayersMax] = React.useState("");
+  const [max_number_of_players, setPlayersMax] = useState();
 
   const handlePlayersMaxChange = (event) => {
     setPlayersMax(event.target.value);
   };
 
-  const [avg_min_game_time, setdurationmin] = React.useState("");
+  const [avg_min_game_time, setdurationmin] = useState();
 
   const handleDurationMinChange = (event) => {
     setdurationmin(event.target.value);
   };
 
-  const [avg_max_game_time, setdurationmax] = React.useState("");
+  const [avg_max_game_time, setdurationmax] = useState();
 
   const handleDurationMaxChange = (event) => {
     setdurationmax(event.target.value);
   };
 
-  const [category, setcategory] = React.useState("");
+  const [category, setcategory] = useState();
 
   const handleCategoryChange = (event) => {
     setcategory(event.target.value);
@@ -346,23 +346,31 @@ const SubmitGame = () => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    console.log('submit')
+console.log(game_name)
+console.log(category)
+console.log('min players', typeof min_number_of_players )
+console.log('max plaerys', typeof max_number_of_players)
+console.log('min time', typeof avg_min_game_time)
+console.log('max time', typeof avg_max_game_time )
+console.log(game_description)
     try {
       await addGame({
         variables: {
           game_name: game_name,
           category: category,
-          min_number_of_players: min_number_of_players,
-          max_number_of_players: max_number_of_players,
-          avg_min_game_time: avg_min_game_time,
-          avg_max_game_time: avg_max_game_time,
+          min_number_of_players: parseInt(min_number_of_players),
+          max_number_of_players: parseInt(max_number_of_players),
+          avg_min_game_time: parseInt(avg_min_game_time),
+          avg_max_game_time: parseInt(avg_max_game_time),
           game_description: game_description, 
+          image: 'default'
         },
       });
-
       // clear form value
       // setText("");
-      setCharacterCount(0);
+      setGameName("")
+      // setCharacterCount(0);
     } catch (e) {
       console.error(e);
     }
@@ -372,8 +380,7 @@ const SubmitGame = () => {
     <div>
       
       <h1 className="homepageTitle">ADD A GAME</h1>
-<form>
-
+<form onSubmit={handleFormSubmit}>
       <Box
         component="form"
         sx={{
@@ -460,7 +467,7 @@ const SubmitGame = () => {
             sx={{ maxWidth: 150}}
           >
             {setAgeMin.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+              <MenuItem key={option} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
@@ -525,7 +532,7 @@ const SubmitGame = () => {
           <Grid item xs={12}>
 
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success" onClick={handleFormSubmit}>
+            <Button variant="contained" color="success" type="submit" onClick={handleFormSubmit}>
               Submit Game
             </Button>
           </Stack>
