@@ -1,5 +1,30 @@
 import { Link } from 'react-router-dom';
 
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: '#1976d2'
+};
+
+const commentStyled = {
+    padding: "10px",
+    color: "white",
+    backgroundColor: "#1976d2"
+}
+
 const CommentList = ({ username, games }) => {
 
     //remove duplicate games from games array
@@ -11,25 +36,42 @@ const CommentList = ({ username, games }) => {
 
     return (
         <div>
+            <Box sx={{ flexGrow: 1, m: 2 }}>
+              <Grid
+                container
+                spacing={1}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                  <Grid item xs={12}>
             <h5>
-                {username}'s {games.length === 1 ? 'comment! Click the game name to see the discussion!' : 'comments! Click the game name to see the discussion!'}
+            <span className="username-style">{username}'s</span> {games.length === 1 ? 'comment! Click the game name to see the discussion!' : 'comments! Click the game name to see the discussion!'}
             </h5>
+            </Grid>
             {games.map((game, index) => (
-                <div>
-                    <button key={game._id}>
-                        <Link to={`/games/${game._id}`}>{game.game_name}</Link>
-                    </button>
+                <Item sx={{ width: 700 }}>
+
+      <Grid item xs={12}>
+                    <Button variant="outlined" color="info" key={game._id}>
+                        <Link style={linkStyle} to={`/games/${game._id}`}>{game.game_name}</Link>
+                    </Button>
+                    </Grid>
                     {games[index].comments.map(comment => (
-                        <div>
+                       
+                             <Grid item xs={12} sx={{ m:2 }}>
                         {
                             comment.username === username ?
-                                <p key={comment._id}>"{comment.commentText}" on {comment.createdAt}</p> 
+                                <h4 style={commentStyled} key={comment._id}>"{comment.commentText}" <p className="createdAt">{comment.createdAt}</p></h4> 
                                 : null
                         }
-                        </div>
+                        
+                        </Grid>
                     ))}
-                </div>
+                </Item>
             ))}
+            </Grid>
+            </Box>
         </div>
     );
 };
