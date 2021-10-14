@@ -130,6 +130,7 @@ export const ADD_GAME = gql`
     $max_number_of_players: Int
     $avg_min_game_time: Int
     $avg_max_game_time: Int
+    $image: String
   ) {
     addGame(
       game_name: $game_name
@@ -139,10 +140,12 @@ export const ADD_GAME = gql`
       max_number_of_players: $max_number_of_players
       avg_min_game_time: $avg_min_game_time
       avg_max_game_time: $avg_max_game_time
+      image: $image
     ) {
       _id
       game_name
       game_description
+      image
     }
   }
 `;
