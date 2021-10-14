@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,7 +8,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
-
+import { useMutation } from "@apollo/react-hooks";
+import { ADD_GAME } from "../utils/mutations"
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -296,26 +297,41 @@ const setCategory = [
 
 const SubmitGame = () => {
 
+  const [characterCount, setCharacterCount] = useState(0);
 
-  const [ageMin, setagemin] = React.useState("");
+  const [addGame] = useMutation(ADD_GAME);
 
-  const handleAgeMinChange = (event) => {
-    setagemin(event.target.value);
+  const [game_name, setGameName] = React.useState("");
+
+  const handleGameNameChange = (event) => {
+    setGameName(event.target.value);
   };
 
-  const [ageMax, setagemax] = React.useState("");
+  const [game_description, setGameDescription] = React.useState("");
 
-  const handleAgeMaxChange = (event) => {
-    setagemax(event.target.value);
+  const handleGameDescriptionChange = (event) => {
+    setGameDescription(event.target.value);
   };
 
-  const [durationMin, setdurationmin] = React.useState("");
+  const [min_number_of_players, setPlayersMin] = React.useState("");
+
+  const handlePlayersMinChange = (event) => {
+    setPlayersMin(event.target.value);
+  };
+
+  const [max_number_of_players, setPlayersMax] = React.useState("");
+
+  const handlePlayersMaxChange = (event) => {
+    setPlayersMax(event.target.value);
+  };
+
+  const [avg_min_game_time, setdurationmin] = React.useState("");
 
   const handleDurationMinChange = (event) => {
     setdurationmin(event.target.value);
   };
 
-  const [durationMax, setdurationmax] = React.useState("");
+  const [avg_max_game_time, setdurationmax] = React.useState("");
 
   const handleDurationMaxChange = (event) => {
     setdurationmax(event.target.value);
@@ -327,9 +343,37 @@ const SubmitGame = () => {
     setcategory(event.target.value);
   };
 
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await addGame({
+        variables: {
+          game_name: game_name,
+          category: category,
+          min_number_of_players: min_number_of_players,
+          max_number_of_players: max_number_of_players,
+          avg_min_game_time: avg_min_game_time,
+          avg_max_game_time: avg_max_game_time,
+          game_description: game_description, 
+        },
+      });
+
+      // clear form value
+      // setText("");
+      setCharacterCount(0);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div>
+      
       <h1 className="homepageTitle">ADD A GAME</h1>
+<form>
+
       <Box
         component="form"
         sx={{
@@ -348,17 +392,19 @@ const SubmitGame = () => {
                    <Grid item xs={12}>
 
           <TextField
-            id="filled-textarea"
+            id="game-name"
             label=""
             placeholder="Title"
             multiline
             variant="filled"
+            value={game_name}
+            onChange={handleGameNameChange}
           />
           </Grid>
           <Grid item xs={12}>
 
           <TextField
-            id=""
+            id="game-category"
             select
             label="Category"
             value={category}
@@ -384,10 +430,12 @@ const SubmitGame = () => {
             defaultValue=""
             placeholder="Description"
             variant="filled"
+            value={game_description}
+            onChange={handleGameDescriptionChange}
           />
 
 </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
 
           <TextField
             id="filled-multiline-static"
@@ -399,15 +447,15 @@ const SubmitGame = () => {
             variant="filled"
           />
 
-</Grid>
+</Grid> */}
           <Grid item xs={12} >
           <TextField
-            id="filled-select-age"
+            id="filled-select-players-min"
             select
-            label="Age"
-            value={ageMin}
-            onChange={handleAgeMinChange}
-            helperText="Min age"
+            label="Players"
+            value={min_number_of_players}
+            onChange={handlePlayersMinChange}
+            helperText="Min players"
             variant="filled"
             sx={{ maxWidth: 150}}
           >
@@ -419,12 +467,12 @@ const SubmitGame = () => {
           </TextField>
 
           <TextField
-            id="filled-select-age"
+            id="filled-select-player-max"
             select
-            label="Age"
-            value={ageMax}
-            onChange={handleAgeMaxChange}
-            helperText="Max age"
+            label="Players"
+            value={max_number_of_players}
+            onChange={handlePlayersMaxChange}
+            helperText="Max players"
             variant="filled"
             sx={{ maxWidth: 150}}
           >
@@ -440,10 +488,10 @@ const SubmitGame = () => {
           <Grid item xs={12}>
 
           <TextField
-            id=""
+            id="min-duration"
             select
             label="Duration"
-            value={durationMin}
+            value={avg_min_game_time}
             onChange={handleDurationMinChange}
             helperText="Min Duration"
             variant="filled"
@@ -457,10 +505,10 @@ const SubmitGame = () => {
           </TextField>
 
           <TextField
-            id=""
+            id="max-duration"
             select
             label="Duration"
-            value={durationMax}
+            value={avg_max_game_time}
             onChange={handleDurationMaxChange}
             helperText="Max Duration"
             variant="filled"
@@ -477,7 +525,7 @@ const SubmitGame = () => {
           <Grid item xs={12}>
 
           <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" onClick={handleFormSubmit}>
               Submit Game
             </Button>
           </Stack>
@@ -485,7 +533,9 @@ const SubmitGame = () => {
           </Grid>
 
         </Grid>
+
       </Box>
+      </form>
     </div>
   );
 };
