@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
@@ -10,6 +11,8 @@ import Auth from '../utils/auth';
 
 
 const Profile = () => {
+
+    const [message, setMessage] = useState(null);
 
     const [addFriend] = useMutation(ADD_FRIEND);
 
@@ -32,13 +35,19 @@ const Profile = () => {
     //set data to variable user
     const user = data?.user || {};
 
-    console.log(user)
-
     const handleAddFriend = async (friendId) => {
+
         try {
             await addFriend({
                 variables: { friendId: friendId }
             })
+
+            setMessage('Friend Added!')
+
+            setTimeout(() => {
+                setMessage(null)
+            }, 2000)
+
         } catch (e) {
             console.log(e)
         }
@@ -59,7 +68,7 @@ const Profile = () => {
 
         //check if the user has games
         if (user.games) {
-            console.log('user games exist')
+
             let userFavoriteGames = []
             let userCommentedGames = []
 
@@ -99,6 +108,10 @@ const Profile = () => {
                                 <button onClick={() => { handleAddFriend(user._id) }}>
                                     + Add Friend
                                 </button>
+                                {message &&
+                                    <div>
+                                        <p>{message}</p>
+                                    </div>}
                             </div>}
                         {/* if logged in user = the username in the URL, display a link to submit a game or don't if you're on another user's page */}
                         {loggedInUser === userParam ?
@@ -157,6 +170,10 @@ const Profile = () => {
                         <button onClick={() => { handleAddFriend(user._id) }}>
                             + Add Friend
                         </button>
+                        {message &&
+                            <div>
+                                <p>{message}</p>
+                            </div>}
                     </div>}
                 {/* if logged in user = the username in the URL, display a link to submit a game or don't if you're on another user's page */}
                 {loggedInUser === userParam ?

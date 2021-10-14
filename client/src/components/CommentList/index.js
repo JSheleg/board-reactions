@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 
 const CommentList = ({ username, games }) => {
 
-    console.log('games', games)
-
     //remove duplicate games from games array
     games = games.filter((item, index, self) => self.indexOf(item) === index)
 
