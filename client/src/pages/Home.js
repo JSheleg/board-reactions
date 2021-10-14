@@ -78,7 +78,7 @@ console.log(allGames)
             
           <Grid i xs={1} key={game.game_name}>
             <img
-              src={require(`../assets/${game.game_name}.jpg`).default}
+              src={require(`../assets/${game.image}.jpg`).default}
               alt={game.game_name}
               loading="lazy"
             />
