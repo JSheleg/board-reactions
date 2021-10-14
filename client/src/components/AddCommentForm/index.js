@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { ADD_COMMENT } from "../../utils/mutations";
+import { ADD_COMMENT, ADD_GAME_TO_USER } from "../../utils/mutations";
 import { QUERY_GAMES } from "../../utils/queries";
 import { QUERY_ME } from "../../utils/queries";
 
@@ -21,6 +21,7 @@ const AddCommentForm = ({ gameId, allComments }) => {
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addComment] = useMutation(ADD_COMMENT);
+  const [addGameToUser] = useMutation(ADD_GAME_TO_USER);
 
   // const [addComment, { error }] = useMutation(ADD_COMMENT, {
   //     update(cache, { data: { addComment } }) {
@@ -68,6 +69,15 @@ const AddCommentForm = ({ gameId, allComments }) => {
     } catch (e) {
       console.error(e);
     }
+
+    try {
+      await addGameToUser({
+        variables: {gameId: gameId}
+      })
+    } catch (e) {
+      console.log(e);
+    }
+
   };
 
   return (
