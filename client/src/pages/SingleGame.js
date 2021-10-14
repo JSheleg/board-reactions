@@ -60,11 +60,7 @@ const SingleGame = (props) => {
       console.log(e);
     }
     
-    setMessage('Game Favorited!')
-
-    setTimeout(() => {
-      setMessage(null)
-    }, 2000)
+    window.location.reload();
   }
 
   return (
