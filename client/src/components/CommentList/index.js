@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 
 const CommentList = ({ username, games }) => {
 
-    console.log('games', games)
-
     //remove duplicate games from games array
     games = games.filter((item, index, self) => self.indexOf(item) === index)
 
@@ -19,7 +17,7 @@ const CommentList = ({ username, games }) => {
             {games.map((game, index) => (
                 <div>
                     <button key={game._id}>
-                        <Link to={`/games/name:${game._id}`}>{game.game_name}</Link>
+                        <Link to={`/games/${game._id}`}>{game.game_name}</Link>
                     </button>
                     {games[index].comments.map(comment => (
                         <div>

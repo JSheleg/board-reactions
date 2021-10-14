@@ -58,7 +58,7 @@ const AllGames = () => {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={require(`../assets/${game.game_name}.jpg`).default}
+                      image={require(`../assets/${game.image}.jpg`).default}
                       alt={game.game_name}
                       key={game.game_name}
                     />
