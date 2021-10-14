@@ -3,8 +3,8 @@ const db = require('../config/connection');
 const faker = require('faker');
 
 
-db.once('open', async() => {
-  
+db.once('open', async () => {
+
   await Game.deleteMany();
   const games = await Game.insertMany(
     [
@@ -548,7 +548,7 @@ db.once('open', async() => {
       },
     ]);
 
-    console.log('games seeded')
+  console.log('games seeded')
 
   await User.deleteMany({});
 
@@ -563,7 +563,7 @@ db.once('open', async() => {
     userData.push({ username, email, password });
     // console.log(userData.length + " user data ");
   }
-  
+
   let createdUsers = [];
 
   createdUsers = await User.collection.insertMany(userData);
@@ -572,7 +572,7 @@ db.once('open', async() => {
 
   // create friends
   for (let i = 0; i < 100; i += 1) {
-    
+
     const randomUserIndex = Math.floor(Math.random() * userData.length);
     // console.log(randomUserIndex + " random user index")
     const { _id: userId } = userData[randomUserIndex];
@@ -589,28 +589,66 @@ db.once('open', async() => {
 
   console.log('friends seeded')
 
-  
-  
-  // create game comments
-  // let createdComments = [];
-  // for (let i = 0; i < 100; i += 1) {
-  //   const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
 
-  //   const randomGameIndex = Math.floor(Math.random() * games.length);
-  //   const { username, _id: gameId } = games[randomGameIndex];
 
-  //   createdComments = await Comment.create({ commentText, username });
+  //create game comments
+  let createdComments = [];
 
-  //   const updatedUser = await User.updateOne(
-  //     { _id: gameId },
-  //     { $push: { comments: createdComments._id } }
-  //   );
+  for (let i = 0; i < 100; i += 1) {
 
-  // }
+    const randomUserIndex = Math.floor(Math.random() * userData.length);
+    // console.log(randomUserIndex + " random user index")
+    let { username: username, _id: userId } = userData[randomUserIndex];
 
-  // console.log('comments seeded')
-    
-    
+    userId = userId.toString();
+
+    const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+
+    const randomGameIndex = Math.floor(Math.random() * games.length);
+    const { _id: gameId } = games[randomGameIndex];
+
+    createdComments = await Comment.create({ commentText, username });
+
+    const gameData = await Game.findByIdAndUpdate(
+      { _id: gameId },
+      { $push: { comments: createdComments._id } }
+    );
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { $addToSet: { games: gameId } }
+    )
+
+  }
+
+  console.log('comments seeded')
+
+  // create favorites
+  for (let i = 0; i < 100; i += 1) {
+
+    const randomUserIndex = Math.floor(Math.random() * userData.length);
+    // console.log(randomUserIndex + " random user index")
+    let { username: username, _id: userId } = userData[randomUserIndex];
+
+    userId = userId.toString();
+
+    const randomGameIndex = Math.floor(Math.random() * games.length);
+    const { _id: gameId } = games[randomGameIndex];
+
+    const gameData = await Game.findByIdAndUpdate(
+      { _id: gameId },
+      { $push: { favorites: { username: username } } }
+    );
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { $addToSet: { games: gameId } }
+    )
+
+  }
+
+  console.log('favorites seeded')
+
   process.exit();
 })
 
