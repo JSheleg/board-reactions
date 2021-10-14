@@ -51,6 +51,14 @@ const SingleGame = (props) => {
     } catch (e) {
       console.log(e)
     }
+
+    try {
+      await addGameToUser({
+        variables: {gameId: gameId}
+      })
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
