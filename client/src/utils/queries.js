@@ -99,6 +99,7 @@ query games {
     avg_min_game_time
     avg_max_game_time
     game_description
+    image
     favoritesCount
     commentCount
   }
@@ -116,6 +117,7 @@ query GameById ($gameId: String!) {
       avg_min_game_time
       avg_max_game_time
       game_description
+      image
       favoritesCount
       favorites {
         username

@@ -53,7 +53,7 @@ const SingleGame = (props) => {
               <CardMedia
                 component="img"
                 height="500"
-                image={ require(`../assets/${singleGame.game_name}.jpg`).default }
+                image={ require(`../assets/${singleGame.image}.jpg`).default }
                 alt="boardgame image"
               />
 

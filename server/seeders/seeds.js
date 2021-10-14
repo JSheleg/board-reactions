@@ -10,6 +10,7 @@ db.once('open', async() => {
     [
       {
         game_name: "Plunder",
+        image: "Plunder",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 6,
@@ -20,6 +21,7 @@ db.once('open', async() => {
       },
       {
         game_name: "UNO",
+        image: "UNO",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 10,
@@ -30,6 +32,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Cards Against Humanity",
+        image: "Cards Against Humanity",
         category: "Storytelling",
         min_number_of_players: 3,
         max_number_of_players: 20,
@@ -40,6 +43,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Cubitos",
+        image: "Cubitos",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -50,6 +54,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Once Upon a Time",
+        image: "Once Upon a Time",
         category: "Storytelling",
         min_number_of_players: 2,
         max_number_of_players: 6,
@@ -60,6 +65,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Sprit Island",
+        image: "Sprit Island",
         category: "Strategy",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -70,6 +76,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Scythe",
+        image: "Scythe",
         category: "Strategy",
         min_number_of_players: 1,
         max_number_of_players: 5,
@@ -80,6 +87,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Root",
+        image: "Root",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -90,6 +98,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Wingspan",
+        image: "Wingspan",
         category: "Strategy",
         min_number_of_players: 1,
         max_number_of_players: 5,
@@ -100,6 +109,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Twilight Struggle",
+        image: "Twilight Struggle",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 2,
@@ -110,6 +120,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Clue",
+        image: "Clue",
         category: "Strategy",
         min_number_of_players: 3,
         max_number_of_players: 6,
@@ -119,6 +130,7 @@ db.once('open', async() => {
       },
       {
         game_name: "BadPlots",
+        image: "BadPlots",
         category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 10,
@@ -129,6 +141,7 @@ db.once('open', async() => {
       },
       {
         game_name: "500 Cribbage",
+        image: "500 Cribbage",
         category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -139,6 +152,7 @@ db.once('open', async() => {
       },
       {
         game_name: "demidancer",
+        image: "demidancer",
         category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 2,
@@ -149,6 +163,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Marvel Champions",
+        image: "Marvel Champions",
         category: "Cards",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -159,6 +174,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Underwater Cities",
+        image: "Underwater Cities",
         category: "Cards",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -169,6 +185,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Aeon's End",
+        image: "Aeon's End",
         category: "Cards",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -179,6 +196,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Race for the Galaxy",
+        image: "Race for the Galaxy",
         category: "Cards",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -189,6 +207,7 @@ db.once('open', async() => {
       },
       {
         game_name: "7 Wonders",
+        image: "7 Wonders",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 7,
@@ -199,6 +218,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Codenames",
+        image: "Codenames",
         category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 8,
@@ -209,6 +229,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Azul",
+        image: "Azul",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -219,6 +240,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Patchwork",
+        image: "Patchwork",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 2,
@@ -229,6 +251,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Go",
+        image: "Go",
         category: "Strategy",
         min_number_of_players: 2,
         max_number_of_players: 2,
@@ -239,6 +262,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Dungeon Petz",
+        image: "Dungeon Petz",
         category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -249,6 +273,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Dungeon Lords",
+        image: "Dungeon Lords",
         category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -259,6 +284,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Telestrations",
+        image: "Telestrations",
         category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 8,
@@ -269,6 +295,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Dixit",
+        image: "Dixit",
         category: "Party",
         min_number_of_players: 3,
         max_number_of_players: 6,
@@ -279,6 +306,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Monikers",
+        image: "Monikers",
         category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 16,
@@ -289,6 +317,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Awkward Guests",
+        image: "Awkward Guests",
         category: "Party",
         min_number_of_players: 1,
         max_number_of_players: 8,
@@ -299,6 +328,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Sheriff of Nottingham",
+        image: "Sheriff of Nottingham",
         category: "Storytelling",
         min_number_of_players: 3,
         max_number_of_players: 5,
@@ -309,6 +339,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Time's Up Title Recall",
+        image: "Time's Up Title Recall",
         category: "Party",
         min_number_of_players: 4,
         max_number_of_players: 18,
@@ -319,6 +350,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Last Will",
+        image: "Last Will",
         category: "Party",
         min_number_of_players: 2,
         max_number_of_players: 5,
@@ -329,6 +361,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Gloomhaven",
+        image: "Gloomhaven",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -339,6 +372,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Nemesis",
+        image: "Nemesis",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 5,
@@ -349,6 +383,7 @@ db.once('open', async() => {
       },
       {
         game_name: "The 7th Continent",
+        image: "The 7th Continent",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -359,6 +394,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Mage Knight Board Game",
+        image: "Mage Knight Board Game",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -369,6 +405,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Too Many Bones",
+        image: "Too Many Bones",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 4,
@@ -379,6 +416,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Eldritch Horror",
+        image: "Eldritch Horror",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 8,
@@ -389,6 +427,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Champions of Midgard",
+        image: "Champions of Midgard",
         category: "Storytelling",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -399,6 +438,7 @@ db.once('open', async() => {
       },
       {
         game_name: "PARKS",
+        image: "PARKS",
         category: "Storytelling",
         min_number_of_players: 1,
         max_number_of_players: 5,
@@ -409,6 +449,7 @@ db.once('open', async() => {
       },
       {
         game_name: "War of the Ring",
+        image: "War of the Ring",
         category: "Storytelling",
         min_number_of_players: 2,
         max_number_of_players: 4,
@@ -419,6 +460,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Poker",
+        image: "Poker",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 10,
@@ -429,6 +471,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casino",
+        image: "Casino",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 5,
@@ -439,6 +482,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Mega Bucks",
+        image: "Mega Bucks",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 7,
@@ -449,6 +493,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casino Hot Dog",
+        image: "Casino Hot Dog",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 8,
@@ -459,6 +504,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casino Yahtzee",
+        image: "Casino Yahtzee",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 6,
@@ -469,6 +515,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Mafia Casino",
+        image: "Mafia Casino",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 8,
@@ -479,6 +526,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Real Las Vegas",
+        image: "Real Las Vegas",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 9,
@@ -489,6 +537,7 @@ db.once('open', async() => {
       },
       {
         game_name: "Casinopoly",
+        image: "Casinopoly",
         category: "Gambling",
         min_number_of_players: 2,
         max_number_of_players: 6,
