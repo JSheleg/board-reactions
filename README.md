@@ -26,9 +26,9 @@ in the board game community to create life long connections!
 
 ## Visual Demonstration
 
-![FindMyBoards GIF/Snapshot]()
+![boardReactions]()
 
-[DEPLOYED ON HEROKU!]()
+[DEPLOYED ON HEROKU!](https://board-reactions.herokuapp.com/)
 
 
 ## User Story
