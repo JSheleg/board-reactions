@@ -26,7 +26,7 @@ in the board game community to create life long connections!
 
 ## Visual Demonstration
 
-![boardReactions]()
+![boardReactions](https://github.com/JSheleg/board-reactions/blob/main/client/src/assets/boardReactions.JPG)
 
 [DEPLOYED ON HEROKU!](https://board-reactions.herokuapp.com/)
 
